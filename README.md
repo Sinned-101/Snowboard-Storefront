@@ -47,6 +47,24 @@ Full documentation lives in the [`database/`](database/) folder:
 - **[`schema.sql`](database/schema.sql)** — the full SQL DDL.
 - **[`seed.sql`](database/seed.sql)** — the sample data.
 
+## Project Models
+
+Whole-project planning models — the actors, architecture, key flows, and domain
+objects — live in the [`Project-Models/`](Project-Models/) folder. See its
+[`README.md`](Project-Models/README.md) for an index. The diagrams reuse the same
+color scheme as the ERD (accounts/catalog/commerce/messaging).
+
+- **[Use Case Diagram](Project-Models/use_case_diagram.drawio)** — the three actors
+  (Customer, Expert, Admin) and what each can do.
+- **[Architecture Diagram](Project-Models/architecture_diagram.drawio)** — the three
+  tiers (Browser → Java → MySQL) and how they connect, including Aiven hosting.
+- **[Class Diagram](Project-Models/class_diagram.drawio)** — the Java domain objects in
+  the logic tier and their relationships.
+- **[Order Status State Diagram](Project-Models/order_status_state_diagram.drawio)** —
+  the legal transitions of `orders.status` (PENDING → … → DELIVERED / CANCELLED).
+- **[Sequence Diagrams](Project-Models/sequence_diagrams.md)** — step-by-step flows for
+  Checkout (riskiest flow) and Login / authentication.
+
 ## Getting Started
 _Setup instructions to be added as the project develops._
 
