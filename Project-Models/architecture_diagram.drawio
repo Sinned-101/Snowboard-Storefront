@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="snowboard-architecture" name="Architecture (Three-Tier)">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tier_pres" value="Presentation Tier — Browser (Client)" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="120" y="60" width="840" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="pres_pages" value="HTML / CSS / JavaScript&#10;&#10;Home · Register · Login · Product List · Product Details&#10;Cart · Checkout · Customer/Expert/Admin Dashboards · Messages" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="160" y="110" width="760" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="tier_logic" value="Logic Tier — Application Server (Java)" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="120" y="320" width="840" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="logic_auth" value="Authentication&#10;&amp; Sessions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="160" y="380" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="logic_routing" value="Routing &amp;&#10;Role-Based Access" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="350" y="380" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="logic_orders" value="Order Processing&#10;(cart → order)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="540" y="380" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="logic_messaging" value="Messaging" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="730" y="380" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="cloud" value="☁ Aiven Cloud" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="120" y="600" width="840" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="tier_data" value="Data Tier — MySQL (InnoDB)" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=13;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="260" y="660" width="560" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="data_db" value="snowboard_storefront — 10 tables&#10;&#10;users · profile · category · product · cart&#10;cart_items · orders · order_items · conversation · message" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="300" y="710" width="480" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="c_pres_logic" value="HTTPS&#10;(requests / responses)" style="endArrow=classic;startArrow=classic;html=1;fontSize=11;strokeWidth=2;" edge="1" parent="1" source="tier_pres" target="tier_logic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c_logic_data" value="JDBC over SSL/TLS&#10;(SQL queries)" style="endArrow=classic;startArrow=classic;html=1;fontSize=11;strokeWidth=2;" edge="1" parent="1" source="tier_logic" target="tier_data">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arch_legend" value="Three-Tier Architecture&#10;Each tier talks only to its neighbor.&#10;Presentation never touches the database directly — it goes through the Java logic tier.&#10;The data tier is hosted on Aiven's managed MySQL (see DEPLOYMENT.md)." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="120" y="860" width="840" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
