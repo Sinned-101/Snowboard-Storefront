@@ -100,7 +100,7 @@ INSERT INTO cart_items (cart_item_id, cart_id, product_id, quantity) VALUES
 -- total_amount matches the sum of (quantity * price_at_order).
 -- ----------------------------------------------------------------------------
 INSERT INTO orders (order_id, user_id, status, total_amount, order_date) VALUES
-    (1, 5, 'delivered', 709.98, '2026-06-01 14:30:00'),   -- 449.99 + (2 * 129.995 -> 259.99) = 709.98
+    (1, 5, 'delivered', 709.98, '2026-06-01 14:30:00'),   -- 449.99 (board) + 259.99 (boots) = 709.98
     (2, 6, 'pending',   139.99, '2026-06-14 09:15:00');
 
 INSERT INTO order_items (order_item_id, order_id, product_id, quantity, price_at_order) VALUES
