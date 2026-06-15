@@ -224,14 +224,26 @@ This is the "why" behind the schema — the part most worth presenting.
 
 ---
 
-## Getting Started
-_Setup instructions to be added as the project develops._
+Getting Started
+Setup instructions to be added as the project develops.
 
-To create the database locally (MySQL 8.0.16+ recommended):
+Create and seed the database locally (MySQL 8.0.16+ recommended):
 
-```bash
 mysql -u root -p < database/schema.sql
-```
+mysql -u root -p < database/seed.sql
+Seed data
+database/seed.sql loads sample rows for development and the demo: 6 users (1 admin, 2 experts, 3 customers), profiles, 8 categories, 16 products, an active cart, two orders, and a customer↔expert conversation with messages.
+
+Test accounts (development only):
+
+Role	Username	Password
+Admin	admin	admin123
+Expert	expert_kai	expert123
+Expert	expert_sam	expert123
+Customer	jordan	pass123
+Customer	mia	pass123
+Customer	leo	pass123
+Note: The password_hash values in seed.sql are placeholder strings for development only. The Java application layer is responsible for hashing real passwords at registration. These credentials are for local testing — never use them in a real deployment.
 
 ## Project Timeline
 
