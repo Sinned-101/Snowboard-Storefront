@@ -1,0 +1,5 @@
+-- Snowboard & Mountain Gear Storefront
+-- MySQL schema (Milestone 1 — Dennis)
+-- 9 tables: user, profile, product, category, cart, cart_items, order, order_items, message
+--
+-- TODO: Define table definitions, primary keys, foreign keys, and relationships.
