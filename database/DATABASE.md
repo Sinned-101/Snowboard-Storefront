@@ -5,6 +5,9 @@
 > The full SQL lives in [`schema.sql`](schema.sql). For seed/sample data, see
 > [`SEED_DATA.md`](SEED_DATA.md).
 
+> **🌐 Hosting:** We're using **[Aiven for MySQL](https://aiven.io/mysql)** as our online
+> database host. See [`DEPLOYMENT.md`](DEPLOYMENT.md) for setup details.
+
 ## At a Glance
 
 - **Engine:** InnoDB (every table) for foreign-key enforcement and transactions
