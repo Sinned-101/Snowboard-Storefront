@@ -116,6 +116,48 @@ A single message inside a conversation.
 - **Why:** `sender_id` records who wrote each message; `is_read` powers unread badges.
   Deleting a conversation **cascades** to its messages.
 
+## Normalization & Indexing
+
+### Normalization (Third Normal Form)
+
+The schema is normalized to **Third Normal Form (3NF)**:
+
+- **1NF — atomic values, no repeating groups.** Every column holds a single value. Lists are
+  modeled as their own rows: a cart's products live in `cart_items`, an order's products in
+  `order_items`, and a thread's messages in `message` — never as comma-separated fields.
+- **2NF — no partial dependencies.** Every non-key column depends on the *whole* primary key.
+  This matters most on the link tables: in `cart_items` and `order_items`, `quantity` (and
+  `price_at_order`) depend on the full row, not on `product_id` alone.
+- **3NF — no transitive dependencies.** Non-key columns don't depend on other non-key columns.
+  For example, a `product` stores only its `category_id` — not the category's name or
+  description — so category facts live in exactly one place (`category`). Likewise, order line
+  items reference a `product_id` rather than copying the product's catalog details.
+
+**One deliberate, documented exception:** `order_items.price_at_order` duplicates the product
+price at purchase time. This is an intentional point-in-time **snapshot**, not a normalization
+mistake — it preserves historical accuracy if a product's price changes later (see design
+rationale #5).
+
+### Indexing
+
+Indexes keep lookups fast as the data grows. Our index strategy:
+
+- **Primary keys** are indexed automatically (every table's `*_id`).
+- **Unique constraints** create indexes too: `users.username`, `users.email`,
+  `(cart_id, product_id)`, `(order_id, product_id)`, `cart.user_id`, `profile.user_id`,
+  `category.name`, and `(customer_id, expert_id)`.
+- **Foreign-key columns** should be indexed for the joins and filters the app runs most:
+  - `product.category_id` — list all products in a category
+  - `cart_items.cart_id`, `order_items.order_id` — load the lines for a cart/order
+  - `orders.user_id` — show a customer's order history
+  - `message.conversation_id` — load a conversation's messages in order
+  - `conversation.customer_id`, `conversation.expert_id` — list a user's threads
+
+> **Note:** In InnoDB, defining a `FOREIGN KEY` automatically creates a supporting index on the
+> referencing column if one doesn't already exist, so most of the above are covered by the
+> foreign keys themselves. We call them out explicitly here because they're the columns our
+> most common queries filter and join on.
+
 ## Design Choices & Rationale (Presentation Talking Points)
 
 This is the "why" behind the schema — the part most worth presenting.
@@ -188,3 +230,5 @@ This is the "why" behind the schema — the part most worth presenting.
   orders remain accurate after price changes.
 - **"Could two people open the same thread twice?"** No — `UNIQUE (customer_id, expert_id)`
   guarantees one conversation per pair.
+- **"Is the database normalized?"** Yes — to Third Normal Form. The one duplicated value
+  (price on an order) is a deliberate historical snapshot, not a normalization slip.
