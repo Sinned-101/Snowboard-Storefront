@@ -129,3 +129,13 @@ Each milestone builds on the one before it: database first, then accounts, then 
 then the cart and orders, and finally the messaging. Doing it in that order lets us get one
 layer working and tested before piling the next one on top, instead of trying to wire everything
 together at the very end.
+
+---
+
+> **Editor's note (added later):** This report is a historical snapshot from the planning phase.
+> The database design has since evolved — the final implementation has **10 tables**, with the
+> accounts table named **`users`** and the orders table named **`orders`** (plural, to avoid the
+> MySQL reserved words `USER`/`ORDER`), and it adds a dedicated **`conversation`** table so
+> messages are grouped into customer↔expert threads. See
+> [`database/DATABASE.md`](../../database/DATABASE.md) and
+> [`database/schema.sql`](../../database/schema.sql) for the current schema.
