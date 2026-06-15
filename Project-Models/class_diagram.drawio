@@ -1,0 +1,110 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="snowboard-class" name="Class Diagram (Logic Tier)">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="c_user" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="220" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="c_user_f" value="- userId: int&#10;- username: String&#10;- email: String&#10;- passwordHash: String&#10;- role: Role&#10;- createdAt: DateTime" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_user">
+          <mxGeometry y="26" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="c_user_m" value="+ register()&#10;+ authenticate()" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_user">
+          <mxGeometry y="126" width="220" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="c_role" value="&lt;&lt;enumeration&gt;&gt;&#10;Role" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=40;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="300" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c_role_v" value="CUSTOMER&#10;EXPERT&#10;ADMIN" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_role">
+          <mxGeometry y="40" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="c_profile" value="Profile" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="80" y="460" width="220" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="c_profile_f" value="- profileId: int&#10;- fullName: String&#10;- phone: String&#10;- address: String&#10;- bio: String" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_profile">
+          <mxGeometry y="26" width="220" height="124" as="geometry" />
+        </mxCell>
+        <mxCell id="c_category" value="Category" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="420" y="80" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c_category_f" value="- categoryId: int&#10;- name: String&#10;- description: String" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_category">
+          <mxGeometry y="26" width="220" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="c_product" value="Product" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="420" y="260" width="220" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="c_product_f" value="- productId: int&#10;- name: String&#10;- description: String&#10;- price: BigDecimal&#10;- stockQuantity: int&#10;- imageUrl: String" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_product">
+          <mxGeometry y="26" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c_product_m" value="+ isInStock(): boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_product">
+          <mxGeometry y="136" width="220" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="c_cart" value="Cart" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="760" y="80" width="240" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="c_cart_f" value="- cartId: int&#10;- items: List&lt;CartItem&gt;" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_cart">
+          <mxGeometry y="26" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c_cart_m" value="+ addItem(p, qty)&#10;+ removeItem(p)&#10;+ getTotal(): BigDecimal&#10;+ checkout(): Order" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_cart">
+          <mxGeometry y="76" width="240" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="c_cartitem" value="CartItem" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="760" y="280" width="240" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c_cartitem_f" value="- cartItemId: int&#10;- product: Product&#10;- quantity: int" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_cartitem">
+          <mxGeometry y="26" width="240" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="c_order" value="Order" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="760" y="450" width="240" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="c_order_f" value="- orderId: int&#10;- status: OrderStatus&#10;- totalAmount: BigDecimal&#10;- orderDate: DateTime&#10;- items: List&lt;OrderItem&gt;" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_order">
+          <mxGeometry y="26" width="240" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="c_order_m" value="+ cancel()&#10;+ updateStatus(s)" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_order">
+          <mxGeometry y="120" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c_orderitem" value="OrderItem" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="760" y="660" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="c_orderitem_f" value="- orderItemId: int&#10;- product: Product&#10;- quantity: int&#10;- priceAtOrder: BigDecimal" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_orderitem">
+          <mxGeometry y="26" width="240" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="c_orderstatus" value="&lt;&lt;enumeration&gt;&gt;&#10;OrderStatus" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=40;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="450" width="170" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="c_orderstatus_v" value="PENDING&#10;PAID&#10;SHIPPED&#10;DELIVERED&#10;CANCELLED" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_orderstatus">
+          <mxGeometry y="40" width="170" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c_conversation" value="Conversation" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="420" y="560" width="240" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="c_conversation_f" value="- conversationId: int&#10;- customer: User&#10;- expert: User&#10;- subject: String&#10;- messages: List&lt;Message&gt;" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_conversation">
+          <mxGeometry y="26" width="240" height="124" as="geometry" />
+        </mxCell>
+        <mxCell id="c_message" value="Message" style="swimlane;fontStyle=1;align=center;verticalAlign=top;startSize=26;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="420" y="760" width="240" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="c_message_f" value="- messageId: int&#10;- sender: User&#10;- body: String&#10;- isRead: boolean&#10;- sentAt: DateTime" style="text;html=1;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_message">
+          <mxGeometry y="26" width="240" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="r_user_role" value="" style="endArrow=open;endFill=0;html=1;" edge="1" parent="1" source="c_user" target="c_role"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_user_profile" value="1     1" style="endArrow=diamondThin;endFill=1;html=1;startArrow=none;fontSize=10;" edge="1" parent="1" source="c_user" target="c_profile"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_user_cart" value="1     1" style="endArrow=diamondThin;endFill=1;html=1;startArrow=none;fontSize=10;" edge="1" parent="1" source="c_user" target="c_cart"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_user_order" value="1     *" style="endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="c_user" target="c_order"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_cat_prod" value="1     *" style="endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="c_category" target="c_product"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_cart_ci" value="1     *" style="endArrow=diamondThin;endFill=1;html=1;fontSize=10;" edge="1" parent="1" source="c_cart" target="c_cartitem"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_ci_prod" value="*     1" style="endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="c_cartitem" target="c_product"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_order_oi" value="1     *" style="endArrow=diamondThin;endFill=1;html=1;fontSize=10;" edge="1" parent="1" source="c_order" target="c_orderitem"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_oi_prod" value="*     1" style="endArrow=open;endFill=0;html=1;fontSize=10;" edge="1" parent="1" source="c_orderitem" target="c_product"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_order_status" value="" style="endArrow=open;endFill=0;html=1;" edge="1" parent="1" source="c_order" target="c_orderstatus"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_conv_msg" value="1     *" style="endArrow=diamondThin;endFill=1;html=1;fontSize=10;" edge="1" parent="1" source="c_conversation" target="c_message"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_conv_user" value="customer / expert" style="endArrow=open;endFill=0;html=1;fontSize=9;dashed=1;" edge="1" parent="1" source="c_conversation" target="c_user"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r_msg_user" value="sender" style="endArrow=open;endFill=0;html=1;fontSize=9;dashed=1;" edge="1" parent="1" source="c_message" target="c_user"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="class_legend" value="Class Diagram (Logic Tier — Java domain model)&#10;filled diamond = composition (part-of)   open arrow = association&#10;Dashed = reference back to User (customer / expert / sender)&#10;Mirrors the 10-table schema; colors match the ERD groups." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="80" width="320" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

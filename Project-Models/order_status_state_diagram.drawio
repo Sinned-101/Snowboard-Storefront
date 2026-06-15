@@ -1,0 +1,51 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="snowboard-order-state" name="Order Status State Diagram">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="start" value="" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="80" y="170" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="st_pending" value="PENDING" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="180" y="160" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="st_paid" value="PAID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="400" y="160" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="st_shipped" value="SHIPPED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="620" y="160" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="st_delivered" value="DELIVERED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="840" y="160" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="st_cancelled" value="CANCELLED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="400" y="380" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="end_delivered" value="" style="ellipse;html=1;fillColor=none;strokeColor=#000000;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="172" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="end_delivered_inner" value="" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1056" y="178" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="end_cancelled" value="" style="ellipse;html=1;fillColor=none;strokeColor=#000000;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="457" y="500" width="26" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="end_cancelled_inner" value="" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="463" y="506" width="14" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="t_start" value="order placed" style="endArrow=classic;html=1;fontSize=11;" edge="1" parent="1" source="start" target="st_pending"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="t_pay" value="payment confirmed" style="endArrow=classic;html=1;fontSize=11;" edge="1" parent="1" source="st_pending" target="st_paid"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="t_ship" value="shipped" style="endArrow=classic;html=1;fontSize=11;" edge="1" parent="1" source="st_paid" target="st_shipped"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="t_deliver" value="delivered" style="endArrow=classic;html=1;fontSize=11;" edge="1" parent="1" source="st_shipped" target="st_delivered"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="t_done" value="" style="endArrow=classic;html=1;" edge="1" parent="1" source="st_delivered" target="end_delivered"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="t_cancel_pending" value="cancel" style="endArrow=classic;html=1;fontSize=11;" edge="1" parent="1" source="st_pending" target="st_cancelled"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="250" y="405" /></Array></mxGeometry></mxCell>
+        <mxCell id="t_cancel_paid" value="cancel / refund" style="endArrow=classic;html=1;fontSize=11;" edge="1" parent="1" source="st_paid" target="st_cancelled"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="t_cancel_done" value="" style="endArrow=classic;html=1;" edge="1" parent="1" source="st_cancelled" target="end_cancelled"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="state_legend" value="Order Status State Machine (orders.status ENUM)&#10;filled = start    ringed = end (terminal)&#10;Happy path: PENDING -&gt; PAID -&gt; SHIPPED -&gt; DELIVERED&#10;Off-ramp: PENDING or PAID -&gt; CANCELLED&#10;Once DELIVERED or CANCELLED, no further transitions." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="620" y="380" width="400" height="110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
