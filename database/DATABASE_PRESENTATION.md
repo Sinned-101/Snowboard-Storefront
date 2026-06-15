@@ -168,7 +168,26 @@ A MySQL design for accounts, catalog, shopping, and expert messaging.
 
 ---
 
-## Slide 11 — Sample Data, Ready to Demo
+## Slide 11 — Smart Choice #6: Built on Solid Foundations (Normalization & Speed)
+
+**Organized to 3NF, and indexed to stay fast**
+
+- **Normalized** so every fact lives in exactly one place — no duplicated data to drift
+- One intentional exception: we *snapshot* the price onto orders (history, by design)
+- **Indexed** the columns we search and join on most, so it stays fast as data grows
+
+> **Say this:** *"Two foundational choices tie everything together. First, the design is
+> normalized — to Third Normal Form, if you want the textbook term — which just means every
+> piece of information is stored in exactly one place. A product's category name lives only in
+> the category table, so it can never get out of sync. The one exception is that price snapshot
+> on orders, and that's on purpose, for history. Second, we added indexes on the columns we
+> search and join on most often — like looking up a customer's orders or loading a
+> conversation's messages — so the app stays fast even as the data grows. Together, these keep
+> the data both correct and quick."*
+
+---
+
+## Slide 12 — Sample Data, Ready to Demo
 
 **The database comes pre-loaded with realistic test data**
 
@@ -182,7 +201,7 @@ A MySQL design for accounts, catalog, shopping, and expert messaging.
 
 ---
 
-## Slide 12 — It's Live in the Cloud
+## Slide 13 — It's Live in the Cloud
 
 **Hosted on Aiven's free managed MySQL**
 
@@ -197,7 +216,7 @@ A MySQL design for accounts, catalog, shopping, and expert messaging.
 
 ---
 
-## Slide 13 — Recap
+## Slide 14 — Recap
 
 **Why this design is solid**
 
@@ -205,16 +224,18 @@ A MySQL design for accounts, catalog, shopping, and expert messaging.
 - 💵 Money stored exactly, with prices snapshotted on orders
 - 🛒 Carts and orders kept separate — history is protected
 - 🛡️ Rules built into the database to prevent bad data
+- 🧱 Normalized to 3NF and indexed for speed
 - ☁️ Live in the cloud on Aiven MySQL
 
 > **Say this:** *"To sum up: we organized everything into four clear areas, we handle money
-> carefully, we protect order history, we built guardrails directly into the database, and we
-> deployed it live in the cloud. Every one of these was a deliberate choice to make the store
-> reliable and trustworthy. Happy to take any questions."*
+> carefully, we protect order history, we built guardrails directly into the database, we
+> normalized the design and indexed it for speed, and we deployed it live in the cloud. Every
+> one of these was a deliberate choice to make the store reliable and trustworthy. Happy to
+> take any questions."*
 
 ---
 
-## Slide 14 — Q&A (Backup Slide)
+## Slide 15 — Q&A (Backup Slide)
 
 Keep these answers in your back pocket:
 
@@ -228,6 +249,9 @@ Keep these answers in your back pocket:
   So old receipts stay accurate even after prices change.
 - **Why does everything connect back to the users table?**
   Because customers, experts, and admins are all just users with different roles.
+- **Is the database normalized?**
+  Yes — to Third Normal Form. The one duplicated value (price on an order) is a deliberate
+  historical snapshot, not a normalization slip.
 - **Where is it hosted?**
   Aiven's free managed MySQL — the same standard MySQL, running in the cloud.
 
@@ -235,7 +259,7 @@ Keep these answers in your back pocket:
 
 ### Presenter Tips
 
-- **Time:** ~5–6 minutes for Slides 1–13, leaving room for Q&A.
+- **Time:** ~6 minutes for Slides 1–14, leaving room for Q&A.
 - **Lead with the picture:** put the Overview diagram up early (Slide 3) and don't rush it.
 - **Don't read fields:** on the detailed diagram, talk about *choices*, not every column.
 - **Repeat the four colors** — it's the mental model the audience will remember.
