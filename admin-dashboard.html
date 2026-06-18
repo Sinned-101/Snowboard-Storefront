@@ -1,0 +1,137 @@
+<!--
+    File: admin-dashboard.html
+    Description: Admin dashboard page for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 14, 2026
+    Last Updated: June 17, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name/title -->
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="admin-dashboard.html">Dashboard</a></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Admin Dashboard</h2>
+
+        <p>
+            Manage store users, products, categories, orders, carts, conversations, and messages
+        </p>
+    </section>
+
+    <!-- Main dashboard area -->
+    <section class="dashboard-section">
+
+        <!-- Admin profile summary -->
+        <article class="dashboard-card">
+            <h3>Admin Profile</h3>
+
+            <p><strong>Name:</strong> Avery Admin</p>
+            <p><strong>Username:</strong> admin</p>
+            <p><strong>Email:</strong> admin@summitgear.test</p>
+            <p><strong>Role:</strong> Admin</p>
+            <p><strong>Location:</strong> Denver, CO</p>
+            <p><strong>Bio:</strong> Site administrator</p>
+
+            <a href="profile.html" class="button">View Profile</a>
+        </article>
+
+        <!-- User summary -->
+        <article class="dashboard-card">
+            <h3>User Summary</h3>
+
+            <p><strong>Total Users:</strong> 6</p>
+            <p><strong>Admins:</strong> 1</p>
+            <p><strong>Experts:</strong> 2</p>
+            <p><strong>Customers:</strong> 3</p>
+
+            <a href="#" class="button">Manage Users</a>
+        </article>
+
+        <!-- Product summary -->
+        <article class="dashboard-card">
+            <h3>Product Summary</h3>
+
+            <p><strong>Total Products:</strong> 16</p>
+            <p><strong>Total Categories:</strong> 8</p>
+            <p><strong>Sample Product:</strong> Summit All-Mountain 156</p>
+            <p><strong>Sample Category:</strong> Snowboards</p>
+
+            <a href="products.html" class="button">Manage Products</a>
+        </article>
+
+        <!-- Order summary -->
+        <article class="dashboard-card">
+            <h3>Order Summary</h3>
+
+            <p><strong>Total Orders:</strong> 2</p>
+            <p><strong>Delivered Orders:</strong> 1</p>
+            <p><strong>Pending Orders:</strong> 1</p>
+            <p><strong>Recent Pending Order:</strong> Leo Petrov - $139.99</p>
+
+            <a href="orders.html" class="button">View Orders</a>
+        </article>
+
+        <!-- Cart summary -->
+        <article class="dashboard-card">
+            <h3>Cart Summary</h3>
+
+            <p><strong>Active Carts:</strong> 1</p>
+            <p><strong>Customer:</strong> Jordan Reyes</p>
+            <p><strong>Cart Items:</strong> Vista Wide Goggles: 1, Frostline Gloves: 2</p>
+            <p><strong>Total Items:</strong> 3</p>
+
+            <a href="cart.html" class="button">View Cart</a>
+        </article>
+
+        <!-- Message summary -->
+        <article class="dashboard-card">
+            <h3>Message Summary</h3>
+
+            <p><strong>Total Conversations:</strong> 1</p>
+            <p><strong>Total Messages:</strong> 4</p>
+            <p><strong>Unread Messages:</strong> 1</p>
+            <p><strong>Conversation:</strong> Which board size for all-mountain?</p>
+
+            <a href="messages.html" class="button">View Messages</a>
+        </article>
+
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

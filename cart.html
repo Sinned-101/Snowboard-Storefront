@@ -1,0 +1,104 @@
+<!--
+    File: cart.html
+    Description: Shopping cart page for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 14, 2026
+    Last Updated: June 17, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name/title -->
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="messages.html">Expert Help</a></li>
+            <li><a href="customer-dashboard.html">Dashboard</a></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Shopping Cart</h2>
+
+        <p>
+            Review the products in your cart before continuing to checkout
+        </p>
+    </section>
+
+    <!-- Cart information -->
+    <section class="dashboard-section">
+
+        <!-- First cart item -->
+        <article class="dashboard-card">
+            <h3>Vista Wide Goggles</h3>
+
+            <p><strong>Product ID:</strong> 9</p>
+            <p><strong>Category:</strong> Goggles</p>
+            <p><strong>Description:</strong> Wide-view goggles with anti-fog lens</p>
+            <p><strong>Price:</strong> $89.99</p>
+            <p><strong>Quantity:</strong> 1</p>
+            <p><strong>Item Total:</strong> $89.99</p>
+        </article>
+
+        <!-- Second cart item -->
+        <article class="dashboard-card">
+            <h3>Frostline Gloves</h3>
+
+            <p><strong>Product ID:</strong> 13</p>
+            <p><strong>Category:</strong> Gloves</p>
+            <p><strong>Description:</strong> Insulated waterproof gloves</p>
+            <p><strong>Price:</strong> $59.99</p>
+            <p><strong>Quantity:</strong> 2</p>
+            <p><strong>Item Total:</strong> $119.98</p>
+        </article>
+
+        <!-- Cart summary -->
+        <article class="dashboard-card">
+            <h3>Cart Summary</h3>
+
+            <p><strong>Customer:</strong> Jordan Reyes</p>
+            <p><strong>Cart ID:</strong> 1</p>
+            <p><strong>Total Products:</strong> 2</p>
+            <p><strong>Total Items:</strong> 3</p>
+            <p><strong>Cart Total:</strong> $209.97</p>
+
+            <p class="form-actions">
+                <a href="checkout.html" class="button">Checkout</a>
+                <a href="products.html" class="button secondary">Continue Shopping</a>
+            </p>
+        </article>
+
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!--
+    File: messages.html
+    Description: Internal messaging page for customers and gear experts for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 14, 2026
+    Last Updated: June 17, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Help | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name/title -->
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="messages.html">Expert Help</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Message a Gear Expert</h2>
+
+        <p>
+            Ask a gear expert for help choosing snowboards, boots, bindings,
+            helmets, goggles, jackets, gloves, or accessories.
+        </p>
+    </section>
+
+    <!-- Messaging area for customer questions and expert responses -->
+    <section class="message-section">
+
+        <!-- Sample conversation preview -->
+        <article class="message-card">
+            <h3>Which board size for all-mountain?</h3>
+
+            <p>
+                <strong>Customer:</strong> Jordan Reyes<br>
+                <strong>Gear Expert:</strong> Kai Nakamura
+            </p>
+
+            <p class="message customer-message">
+                <strong>Jordan:</strong> Hi! I'm 5'10" and ride mostly all-mountain. Is the Summit 156 a good fit?
+            </p>
+
+            <p class="message expert-message">
+                <strong>Kai:</strong> Great question! The 156 works well for your height. If you like faster riding, the 162W gives more stability.
+            </p>
+
+            <p class="message customer-message">
+                <strong>Jordan:</strong> Got it. I mostly cruise groomers and dip into powder sometimes.
+            </p>
+
+            <p class="message expert-message">
+                <strong>Kai:</strong> Then the 156 all-mountain is a solid pick. Pair it with the Ridge Lock bindings and you're set.
+            </p>
+        </article>
+
+        <!-- Form for sending a new message -->
+        <form class="message-form" action="#" method="post">
+            <h3>Send a Message</h3>
+
+            <!-- Subject field for the message -->
+            <p>
+                <label for="subject">Subject</label>
+                <input type="text" id= "subject" name="subject" value="Which board size for all-mountain?" 
+                required>
+            </p>
+
+            <!-- Message text area -->
+            <p>
+                <label for="body">Message</label>
+                <textarea id="body" name="body" rows="6" placeholder="Type your message to a gear expert" required></textarea>
+            </p>
+
+            <!-- Submit button -->
+            <p class="form-actions">
+                <button type="submit" class="button">Send Message</button>
+            </p>
+        </form>
+
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

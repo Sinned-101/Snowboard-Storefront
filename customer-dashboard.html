@@ -1,0 +1,115 @@
+<!--
+    File: customer-dashboard.html
+    Description: Customer dashboard page for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 11, 2026
+    Last Updated: June 17, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name/title -->
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="messages.html">Expert Help</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Customer Dashboard</h2>
+
+        <p>
+            View your profile, cart, order information, and gear expert messages 
+        </p>
+    </section>
+
+    <!-- Dashboard content -->
+    <section class="dashboard-section">
+
+        <!-- Customer profile -->
+        <article class="dashboard-card">
+            <h3>Profile Summary</h3>
+
+            <p><strong>Name:</strong> Jordan Reyes</p>
+            <p><strong>Username:</strong> jordan</p>
+            <p><strong>Email:</strong> jordan@example.test</p>
+            <p><strong>Location:</strong> Boulder, CO</p>
+
+            <a href="profile.html" class="button">View Profile</a>
+        </article>
+
+        <!-- Cart summary -->
+        <article class="dashboard-card">
+            <h3>Shopping Cart</h3>
+
+            <p><strong>Cart ID:</strong> 1</p>
+            <p><strong>Cart Items:</strong></p>
+            <p>Vista Wide Goggles: 1</p>
+            <p>Frostline Gloves: 2</p>
+            <p><strong>Total Items:</strong> 3</p>
+
+            <a href="cart.html" class="button">View Cart</a>
+        </article>
+
+        <!-- Recent order information -->
+        <article class="dashboard-card">
+            <h3>Recent Orders</h3>
+
+             <p>
+                This customer currently has no completed orders
+            </p>
+
+            <p>
+                Orders placed through checkout will later appear here
+            </p>
+
+            <a href="orders.html" class="button">View Orders</a>
+        </article>
+
+        <!-- Message summary -->
+        <article class="dashboard-card">
+            <h3>Messages</h3>
+
+            <p><strong>Conversation:</strong> Which board size for all-mountain?</p>
+            <p><strong>Gear Expert:</strong> Kai Nakamura</p>
+            <p><strong>Unread Messages:</strong> 1</p>
+
+            <a href="messages.html" class="button">View Messages</a>
+        </article>
+
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
