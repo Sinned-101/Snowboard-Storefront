@@ -1,0 +1,108 @@
+<!--
+    File: orders.html
+    Description: Orders page for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 14, 2026
+    Last Updated: June 17, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name/title -->
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="messages.html">Expert Help</a></li>
+            <li><a href="customer-dashboard.html">Dashboard</a></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Orders</h2>
+
+        <p>
+            View order history, order status, purchased products, and order totals
+        </p>
+    </section>
+
+    <!-- Order information -->
+    <section class="dashboard-section">
+
+        <!-- First order -->
+        <article class="dashboard-card">
+            <h3>Order #1</h3>
+
+            <p><strong>Customer:</strong> Mia Chen</p>
+            <p><strong>Status:</strong> Delivered</p>
+            <p><strong>Order Date:</strong> June 1, 2026 at 2:30 PM</p>
+
+            <p><strong>Items:</strong></p>
+            <p>Summit All-Mountain 156: 1 × $449.99 = $449.99</p>
+            <p>Glacier Boa Boots: 1 × $259.99 = $259.99</p>
+
+            <p><strong>Order Total:</strong> $709.98</p>
+        </article>
+
+        <!-- Second order -->
+        <article class="dashboard-card">
+            <h3>Order #2</h3>
+
+            <p><strong>Customer:</strong> Leo Petrov</p>
+            <p><strong>Status:</strong> Pending</p>
+            <p><strong>Order Date:</strong> June 14, 2026 at 9:15 AM</p>
+
+            <p><strong>Items:</strong></p>
+            <p>Guard MIPS Helmet: 1 × $139.99 = $139.99</p>
+
+            <p><strong>Order Total:</strong> $139.99</p>
+        </article>
+
+        <!-- Order summary -->
+        <article class="dashboard-card">
+            <h3>Order Summary</h3>
+
+            <p><strong>Total Orders:</strong> 2</p>
+            <p><strong>Delivered Orders:</strong> 1</p>
+            <p><strong>Pending Orders:</strong> 1</p>
+            <p><strong>Total Order Revenue:</strong> $849.97</p>
+
+            <p class="form-actions">
+                <a href="products.html" class="button">Shop Products</a>
+                <a href="customer-dashboard.html" class="button secondary">Back to Dashboard</a>
+            </p>
+        </article>
+
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

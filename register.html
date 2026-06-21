@@ -1,0 +1,160 @@
+<!--
+    File: register.html
+    Description: Registration page for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 11, 2026
+    Last Updated: June 17, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name/title -->
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="messages.html">Expert Help</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Create an Account</h2>
+
+        <p>
+            Register for an account to browse gear, place orders,
+            manage your profile, or message a gear expert
+        </p>
+    </section>
+
+    <!-- Registration form section -->
+    <section class="form-section">
+        <form class="account-form" action="#" method="post">
+            <h2>Register</h2>
+            
+            <!-- Account information -->
+
+            <!-- Username field -->
+            <p>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </p>
+
+             <!-- Email field -->
+            <p>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </p>
+
+               <!-- Password field -->
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </p>
+
+            <!-- Confirm password field -->
+            <p>
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </p>
+
+            <!-- Profile information -->
+
+            <!-- First name field -->
+            <p>
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first_name">
+            </p>
+
+            <!-- Last name field -->
+            <p>
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last_name">
+            </p>
+
+            <!-- Phone field -->
+            <p>
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone">
+            </p>
+
+            <!-- Address field -->
+            <p>
+                <label for="address-line">Address</label>
+                <input type="text" id="address-line" name="address_line">
+            </p>
+        
+            <!-- City field -->
+            <p>
+                <label for="city">City</label>
+                <input type="text" id="city" name="city">
+            </p>
+
+            <!-- State field -->
+            <p>
+                <label for="state">State</label>
+                <input type="text" id="state" name="state">
+            </p>
+
+            <!-- Postal code field -->
+            <p>
+                <label for="postal-code">Postal Code</label>
+                <input type="text" id="postal-code" name="postal_code">
+            </p>
+
+            <!-- Country field -->
+            <p>
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country">
+            </p>
+
+            <!-- Additional profile information -->
+            <p>
+                <label for="bio">Gear Notes</label>
+                <textarea id="bio" name="bio" rows="4" placeholder="Example: beginner rider, all-mountain style, looking for board and boot advice"></textarea>
+            </p>
+
+            <!-- Form submit button -->
+            <p class="form-actions">
+                <button type="submit" class="button">Create Account</button>
+            </p>
+
+            <!-- Link for users who already have an account -->
+            <p class="form-note">
+                Already have an account?
+                <a href="login.html">Sign in here.</a>
+            </p>
+        </form>
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
