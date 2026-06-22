@@ -33,6 +33,28 @@ Each role lands on a dashboard built for them.
 - **Front end:** HTML, CSS, JavaScript
 - **Version control:** GitHub
 
+## Frontend Pages
+
+The initial frontend webpage templates have been added using HTML and CSS. These pages are currently static templates, but their sample content is aligned with the current MySQL schema and seed data.
+
+Added pages include:
+
+* Home page
+* Product listing page
+* Product details page
+* Login page
+* Registration page
+* Customer dashboard
+* Expert dashboard
+* Admin dashboard
+* Profile page
+* Cart page
+* Checkout page
+* Orders page
+* Messages page
+
+The product names, categories, prices, cart items, orders, user profiles, and message examples shown on the pages are based on the sample records in `database/seed.sql`.
+
 ## Database
 
 The database is a MySQL schema of **10 tables** (`users`, `profile`, `category`,
