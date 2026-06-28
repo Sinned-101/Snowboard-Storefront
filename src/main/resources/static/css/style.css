@@ -1,0 +1,516 @@
+/*
+    File: style.css
+    Description: Main stylesheet for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 9, 2026
+    Last Updated: June 14, 2026
+*/
+
+/* General page styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: #f4f4f4;
+}
+
+/* Navigation bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #020202, #0b5f32, #20e878);
+    color: white;
+    padding: 18px 40px;
+    border-bottom: 3px solid #20e878;
+}
+
+/* Website logo/name */
+.logo {
+    margin: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Displays the navigation menu as a horizontal row */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation links */
+.nav-links a {
+    color: #020202;
+    background-color: #20e878;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 18px;
+    border-radius: 25px;
+    border: 2px solid #020202;
+}
+
+/* Hover effect for navigation links */
+.nav-links a:hover {
+    background-color: #9dffd0;
+}
+
+/* Hero section at the top of the home page */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(to right, #03170d, #111, #03170d);
+    border-bottom: 3px solid #20e878;
+}
+
+/* Main hero heading */
+.hero h2 {
+    font-size: 38px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+/* Hero paragraph text */
+.hero p {
+    font-size: 18px;
+    max-width: 650px;
+    margin: 0 auto 25px;
+    color: #d8d8d8;
+}
+
+/* Home page action links */
+.hero-buttons {
+    margin-top: 25px;
+}
+
+/* Page heading section */
+.page-heading {
+    text-align: center;
+    padding: 60px 40px;
+    background: linear-gradient(to right, #03170d, #111, #03170d);
+    border-bottom: 3px solid #20e878;
+}
+
+.page-heading h2 {
+    font-size: 34px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.page-heading p {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #d8d8d8;
+    font-size: 18px;
+}
+
+/* Buttons */
+.button {
+    display: inline-block;
+    background-color: #20e878;
+    color: #020202;
+    padding: 12px 22px;
+    margin: 5px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+/* Button hover effect */
+.button:hover {
+    background-color: #9dffd0;
+}
+
+/* Secondary button for the Ask an Expert option */
+.secondary {
+    background-color: #0fb85d;
+}
+
+/* Secondary button hover effect */
+.secondary:hover {
+    background-color: #20e878;
+}
+
+/* Main content sections */
+.categories,
+.expert-help,
+.featured-products {
+    padding: 40px;
+    text-align: center;
+}
+
+/* Section headings */
+.categories h2,
+.expert-help h2,
+.featured-products h2 {
+    color: #20e878;
+    letter-spacing: 1px;
+}
+
+/* Grid layout for product categories */
+.category-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0;
+}
+
+/* Product category cards */
+.category-card {
+    background-color: #07130d;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #20e878;
+}
+
+/* Category card links */
+.category-card a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+
+/* Expert help section background */
+.expert-help {
+    background: linear-gradient(to right, #041f12, #0b5f32, #20c76a);
+    color: white;
+    border-top: 3px solid #20e878;
+    border-bottom: 3px solid #20e878;
+}
+
+/* Width for the expert help paragraph */
+.expert-help p {
+    max-width: 650px;
+    margin: 0 auto 20px;
+    color: #f4f4f4;
+}
+
+/* Featured product cards */
+.product-card {
+    display: inline-block;
+    width: 250px;
+    vertical-align: top;
+    background-color: #f4f4f4;
+    color: #111;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    border-left: 6px solid #20e878;
+}
+
+/* Product card headings */
+.product-card h3 {
+    margin-top: 0;
+    color: #111;
+}
+
+/* Product detail page layout */
+.product-detail {
+    padding: 50px 20px;
+    background: linear-gradient(to right, #03170d, #111, #03170d);
+}
+
+/* Main product detail card */
+.detail-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f4f4f4;
+    color: #111;
+    padding: 35px;
+    border-radius: 8px;
+    border-left: 6px solid #20e878;
+}
+
+/* Product detail title */
+.detail-card h2 {
+    margin-top: 0;
+    color: #111;
+    text-align: center;
+}
+
+/* Product image on the product details page */
+.product-image {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+    border: 2px solid #20e878;
+}
+
+/* Product price on the details page */
+.product-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0b5f32;
+    text-align: center;
+}
+
+/* Product action buttons */
+.product-actions {
+    margin-top: 25px;
+    text-align: center;
+}
+
+/* Form section layout for login and registration pages */
+.form-section {
+    padding: 50px 20px;
+    background: linear-gradient(to right, #03170d, #111, #03170d);
+}
+
+/* Main account form card */
+.account-form {
+    max-width: 450px;
+    margin: 0 auto;
+    background-color: #f4f4f4;
+    color: #111;
+    padding: 35px;
+    border-radius: 8px;
+    border-left: 6px solid #20e878;
+}
+
+/* Form heading */
+.account-form h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #111;
+}
+
+/* Form label */
+.account-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+/* Text and password input */
+.account-form input,
+.account-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Centers form button */
+.form-actions {
+    text-align: center;
+    margin-top: 25px;
+}
+
+/* Note below form */
+.form-note {
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Link inside form note */
+.form-note a {
+    color: #0b5f32;
+    font-weight: bold;
+}
+
+/* Dashboard page layout */
+.dashboard-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    padding: 50px 20px;
+    background: linear-gradient(to right, #03170d, #111, #03170d);
+}
+
+/* Dashboard cards for user information and shortcuts */
+.dashboard-card {
+    background-color: #f4f4f4;
+    color: #111;
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 6px solid #20e878;
+}
+
+/* Dashboard card headings */
+.dashboard-card h3 {
+    margin-top: 0;
+    color: #111;
+}
+
+/* Footer section */
+footer {
+    text-align: center;
+    background-color: #020202;
+    color: #f4f4f4;
+    padding: 15px;
+    border-top: 3px solid #20e878;
+}
+
+/* Messaging page layout */
+.message-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    padding: 50px 20px;
+    background: linear-gradient(to right, #03170d, #111, #03170d);
+}
+
+/* Card used to display sample conversations */
+.message-card {
+    background-color: #f4f4f4;
+    color: #111;
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 6px solid #20e878;
+}
+
+/* Individual message style */
+.message {
+    padding: 15px;
+    border-radius: 8px;
+    line-height: 1.5;
+}
+
+/* Customer message bubble */
+.customer-message {
+    background-color: #e8f8ef;
+    border-left: 4px solid #0b5f32;
+}
+
+/* Expert message bubble */
+.expert-message {
+    background-color: #eeeeee;
+    border-left: 4px solid #20e878;
+}
+
+/* Form used for sending internal messages */
+.message-form {
+    background-color: #f4f4f4;
+    color: #111;
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 6px solid #20e878;
+}
+
+/* Message form headings */
+.message-card h3,
+.message-form h3 {
+    margin-top: 0;
+    color: #111;
+}
+
+/* Message form labels */
+.message-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+/* Message form input and text area styles */
+.message-form input,
+.message-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Adjusts layout for tablets and smaller screens */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero {
+        padding: 50px 20px;
+    }
+
+    .hero h2 {
+        font-size: 28px;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product-card {
+        width: 80%;
+    }
+}
+
+/* Adjusts layout for phone-sized screens */
+@media screen and (max-width: 480px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .button {
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+    }
+
+    .product-card {
+        width: 90%;
+        box-sizing: border-box;
+    }
+
+    .page-heading h2 {
+        font-size: 26px;
+    }
+
+    .page-heading p {
+        font-size: 16px;
+    }
+
+    .detail-card {
+        padding: 25px;
+        box-sizing: border-box;
+    }
+
+    .product-image {
+        max-width: 100%;
+    }
+
+    .product-actions {
+        text-align: center;
+    }
+
+    .account-form {
+        padding: 25px;
+        box-sizing: border-box;
+    }
+
+    .dashboard-section {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-card {
+        box-sizing: border-box;
+    }
+
+    .message-section {
+        grid-template-columns: 1fr;
+    }
+
+    .message-card,
+    .message-form {
+        box-sizing: border-box;
+    }
+}
