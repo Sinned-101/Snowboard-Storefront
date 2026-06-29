@@ -22,14 +22,15 @@ Each role lands on a dashboard built for them.
 
 ## Architecture (Three-Tier)
 
-1. **Presentation** — HTML, CSS, and JavaScript (home, register, login, product listing,
-   product details, cart, checkout, three dashboards, messages)
-2. **Logic** — Java (authentication, routing, order processing, messaging)
+1. **Presentation** — HTML, CSS, JavaScript, and Thymeleaf templates for the home page, registration, login, product pages,
+   product details, cart, checkout, dashboards, and messaging
+2. **Logic** — Java with Spring Boot controllers, authentication, routing, registration, logout, order processing, and messaging
 3. **Data** — MySQL database with ten tables
 
 ## Tech Stack
 - **Database:** MySQL
-- **Server-side:** Java
+- **Server-side:** Java, Spring Boot, JDBC
+- **Templates:** Thymeleaf
 - **Front end:** HTML, CSS, JavaScript
 - **Version control:** GitHub
 
@@ -54,6 +55,25 @@ Added pages include:
 * Messages page
 
 The product names, categories, prices, cart items, orders, user profiles, and message examples shown on the pages are based on the sample records in `database/seed.sql`.
+
+## Spring Boot Backend
+
+The project now includes an initial Spring Boot Maven setup. The application can run locally through Spring Boot and uses controller routes to display pages instead of opening static HTML files directly.
+
+Current backend features include:
+
+* Spring Boot project structure with Maven
+* Thymeleaf template support
+* JDBC connection to the local MySQL database
+* Registration form connected to the users and profile tables
+* Login form connected to the users table
+* Passwords stored using BCrypt password hashing
+* Session-based login tracking
+* Logout route that ends the current user session
+* Error messages for failed registration and login attempts
+
+Additional backend work will continue as dashboards, product pages, cart features, orders, and messaging are connected to the database.
+
 
 ## Database
 
@@ -88,17 +108,42 @@ color scheme as the ERD (accounts/catalog/commerce/messaging).
   Checkout (riskiest flow) and Login / authentication.
 
 ## Getting Started
-_Setup instructions to be added as the project develops._
 
-Create and seed the database locally (MySQL 8.0.16+ recommended):
+Create and seed the database locally using MySQL:
 
-```bash
+```text
 mysql -u root -p < database/schema.sql
 mysql -u root -p < database/seed.sql
 ```
 
-See [`database/SEED_DATA.md`](database/SEED_DATA.md) for details on the sample data and
-test accounts.
+Update the local database connection settings in:
+
+```text
+src/main/resources/application.properties
+```
+
+Example local settings:
+
+```text
+spring.datasource.url=jdbc:mysql://localhost:3306/snowboard_storefront
+spring.datasource.username=root
+spring.datasource.password=your_mysql_password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+```
+
+Run the Spring Boot application from IntelliJ using:
+
+```text
+SnowboardStorefrontApplication.java
+```
+
+Then open the application in a browser:
+
+```text
+http://localhost:8080
+```
+
+See `database/SEED_DATA.md` for details on the sample data and test accounts.
 
 ## Project Timeline
 
