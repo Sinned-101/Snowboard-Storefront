@@ -424,6 +424,17 @@ footer {
     font-family: Arial, sans-serif;
 }
 
+/* Error message styles */
+.error-message {
+    color: #b00020;
+    background-color: #f8d7da;
+    border: 1px solid #b00020;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
 /* Adjusts layout for tablets and smaller screens */
 @media screen and (max-width: 768px) {
     .navbar {

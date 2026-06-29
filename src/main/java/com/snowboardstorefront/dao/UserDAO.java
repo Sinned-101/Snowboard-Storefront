@@ -1,0 +1,108 @@
+/*
+ * File: UserDAO.java
+ * Description: Data access class for user account records
+ * Author: Zach Christianson
+ * Date Created: June 28, 2026
+ * Last Updated: June 28, 2026
+ */
+
+package com.snowboardstorefront.dao;
+
+import com.snowboardstorefront.model.User;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+/**
+ * Handles database operations for the users table
+ */
+@Repository
+public class UserDAO {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    /**
+     * Initializes the UserDAO with the database helper object
+     *
+     * @param jdbcTemplate Spring database helper object
+     */
+    public UserDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    /**
+     * Checks whether a username or email is already used
+     *
+     * @param username username entered during registration
+     * @param email email entered during registration
+     * @return true if the username or email already exists
+     */
+    public boolean userExists(String username, String email) {
+        String sql = """
+                SELECT COUNT(*)
+                FROM users
+                WHERE username = ? OR email = ?
+                """;
+
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, username, email);
+
+        return count != null && count > 0;
+    }
+
+    /**
+     * Adds a new user account to the users table
+     *
+     * @param user user account information
+     * @return the new user's generated user ID
+     */
+    public int createUser(User user) {
+        String sql = """
+                INSERT INTO users (username, email, password_hash, role)
+                VALUES (?, ?, ?, ?)
+                """;
+
+        jdbcTemplate.update(
+                sql,
+                user.getUsername(),
+                user.getEmail(),
+                user.getPasswordHash(),
+                user.getRole()
+        );
+
+        String idSql = "SELECT LAST_INSERT_ID()";
+
+        Integer userId = jdbcTemplate.queryForObject(idSql, Integer.class);
+
+        return userId == null ? 0 : userId;
+    }
+
+    /**
+     * Finds a user by username or email to log them in
+     *
+     * @param loginIdentifier username or email entered during login
+     * @return matching user account, or null if no user is found
+     */
+    public User findByUsernameOrEmail(String loginIdentifier) {
+        String sql = """
+            SELECT user_id, username, email, password_hash, role
+            FROM users
+            WHERE username = ? OR email = ?
+            """;
+
+        try {
+            return jdbcTemplate.queryForObject(
+                    sql,
+                    (resultSet, rowNum) -> new User(
+                            resultSet.getInt("user_id"),
+                            resultSet.getString("username"),
+                            resultSet.getString("email"),
+                            resultSet.getString("password_hash"),
+                            resultSet.getString("role")
+                    ),
+                    loginIdentifier,
+                    loginIdentifier
+            );
+        } catch (Exception exception) {
+            return null;
+        }
+    }
+}
