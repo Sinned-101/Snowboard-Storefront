@@ -1,0 +1,93 @@
+<!--
+    File: login.html
+    Description: Login page for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 11, 2026
+    Last Updated: June 17, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name/title -->
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/messages">Expert Help</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Account Login</h2>
+
+        <p>
+            Sign in to access your dashboard, view orders, manage your profile,
+            or message a gear expert
+        </p>
+    </section>
+
+    <!-- Login form section -->
+    <section class="form-section">
+        <form class="account-form" action="/login" method="post">
+            <h2>Sign In</h2>
+
+            <!-- Shows an error message if the login information is incorrect -->
+            <p class="error-message" th:if="${loginError}" th:text="${loginError}"></p>
+
+            <!-- Username or email field -->
+            <p>
+                <label for="login-identifier">Username or Email</label>
+                <input type="text" id="login-identifier" name="login_identifier" required>
+            </p>
+
+            <!-- Password field -->
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </p>
+
+            <!-- Submit button -->
+            <p class="form-actions">
+                <button type="submit" class="button">Login</button>
+            </p>
+
+            <!-- Link to create an account -->
+            <p class="form-note">
+                Don't have an account?
+                <a href="/register">Create one here.</a>
+            </p>
+        </form>
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
