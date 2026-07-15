@@ -3,7 +3,7 @@
     Description: Home page for the Black Diamond Gear web application
     Author: Zach Christianson
     Date Created: June 9, 2026
-    Last Updated: June 17, 2026
+    Last Updated: July 14, 2026
 -->
 
 <!DOCTYPE html>
@@ -61,35 +61,35 @@
         <!-- Product category list -->
         <ul class="category-grid">
             <li class="category-card">
-                <a href="products.html">Snowboards</a>
+                <a href="/products?category=Snowboards">Snowboards</a>
             </li>
 
             <li class="category-card">
-                <a href="products.html">Boots</a>
+                <a href="/products?category=Boots">Boots</a>
             </li>
 
             <li class="category-card">
-                <a href="products.html">Bindings</a>
+                <a href="/products?category=Bindings">Bindings</a>
             </li>
 
             <li class="category-card">
-                <a href="products.html">Helmets</a>
+                <a href="/products?category=Helmets">Helmets</a>
             </li>
 
             <li class="category-card">
-                <a href="products.html">Goggles</a>
+                <a href="/products?category=Goggles">Goggles</a>
             </li>
 
             <li class="category-card">
-                <a href="products.html">Jackets</a>
+                <a href="/products?category=Jackets">Jackets</a>
             </li>
 
             <li class="category-card">
-                <a href="products.html">Gloves</a>
+                <a href="/products?category=Gloves">Gloves</a>
             </li>
 
             <li class="category-card">
-                <a href="products.html">Accessories</a>
+                <a href="/products?category=Accessories">Accessories</a>
             </li>
         </ul>
     </section>
@@ -110,31 +110,34 @@
         </p>
     </section>
 
-    <!-- Featured products section -->
+    <!-- Featured products shown on the home page -->
     <section class="featured-products">
         <h2>Featured Products</h2>
 
-        <!-- Each article displays one featured product -->
-        <article class="product-card">
-            <h3>Summit All-Mountain 156</h3>
-            <p>Versatile all-mountain board, 156cm</p>
-            <p>$449.99</p>
-            <a href="product-details.html?id=1" class="button">View Details</a>
-        </article>
+        <!-- Displays selected sample products with links to their detail pages -->
+        <section class="product-grid">
 
-        <article class="product-card">
-            <h3>Glacier Boa Boots</h3>
-            <p>Medium-flex boots with Boa lacing</p>
-            <p>$259.99</p>
-            <a href="product-details.html?id=3" class="button">View Details</a>
-        </article>
+            <!-- Featured snowboard product -->
+            <article class="product-card">
+                <h3>Summit All-Mountain 156</h3>
+                <p class="product-price">$449.99</p>
+                <a href="/products/1" class="button">View Details</a>
+            </article>
 
-        <article class="product-card">
-            <h3>Crest Snow Helmet</h3>
-            <p>Lightweight helmet with adjustable vents</p>
-            <p>$99.99</p>
-            <a href="product-details.html?id=7" class="button">View Details</a>
-        </article>
+            <!-- Featured goggles product -->
+            <article class="product-card">
+                <h3>Vista Wide Goggles</h3>
+                <p class="product-price">$89.99</p>
+                <a href="/products/9" class="button">View Details</a>
+            </article>
+
+            <!-- Featured gloves product -->
+            <article class="product-card">
+                <h3>Frostline Gloves</h3>
+                <p class="product-price">$59.99</p>
+                <a href="/products/13" class="button">View Details</a>
+            </article>
+        </section>
     </section>
 
 </main>
