@@ -1,0 +1,81 @@
+<!--
+    File: products.html
+    Description: Product listing page for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 9, 2026
+    Last Updated: July 14, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name/title -->
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/messages">Expert Help</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Shop Snowboarding and Mountain Gear</h2>
+        <p>
+            Browse all types of gear, including snowboards, boots,
+            bindings, helmets, goggles, jackets, gloves,and accessories
+        </p>
+    </section>
+
+    <!-- Product cards -->
+    <section class="featured-products">
+        <h2>Available Products</h2>
+        <p class="section-intro" th:text="${selectedCategory}">All Products</p>
+
+        <!-- Displays one product card for each product sent from ProductController -->
+        <section class="product-grid">
+            <article class="product-card" th:each="product : ${products}">
+
+                <!-- Shows basic product information from the database for browsing -->
+                <h3 th:text="${product.productName}">Product Name</h3>
+                <p class="product-category" th:text="${'Category: ' + product.categoryName}">Category: Category</p>
+                <p class="product-price" th:text="${'$' + product.price}">$0.00</p>
+
+                <!-- Links to the detail page for the selected product -->
+                <a th:href="@{/products/{id}(id=${product.productId})}" class="button">
+                    View Details
+                </a>
+            </article>
+        </section>
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!--
+    File: product-details.html
+    Description: Product details page for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 11, 2026
+    Last Updated: July 14, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name/title -->
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/messages">Expert Help</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Displays information about one selected product -->
+    <section class="product-detail">
+        <article class="detail-card">
+
+            <!-- Shows the selected product name from the database -->
+            <h2 th:text="${product.productName}">Product Name</h2>
+
+            <!-- Product image placeholder until images are added later -->
+            <!--
+            <img src="/images/products/placeholder.jpg"
+                 alt="Product image"
+                 class="product-image">
+            -->
+
+            <!-- Product information from the database -->
+            <p class="product-price" th:text="${'$' + product.price}">$0.00</p>
+            <p class="product-category" th:text="${'Category: ' + product.categoryName}">Category: Category</p>
+            <p th:text="${'Description: ' + product.description}">Description: Product description</p>
+            <p th:text="${'Stock Quantity: ' + product.stockQuantity}">Stock Quantity: 0</p>
+
+            <!-- Product action links -->
+            <p class="product-actions">
+                <a href="/cart" class="button">Add to Cart</a>
+                <a href="/messages" class="button secondary">Ask an Expert</a>
+                <a href="/products" class="button secondary">Back to Products</a>
+            </p>
+        </article>
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
