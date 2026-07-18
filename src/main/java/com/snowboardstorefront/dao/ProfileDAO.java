@@ -65,4 +65,42 @@ public class ProfileDAO {
                 profile.getBio()
         );
     }
+
+    public Profile findByUserId(int userId) {
+
+        // SQL query to get all profile columns for the given user ID
+        String sql = """
+                SELECT profile_id, user_id, first_name, last_name, phone,
+                       address_line, city, state, postal_code, country, bio
+                FROM profile
+                WHERE user_id = ?
+                """;
+
+        try {
+            // queryForObject runs the query and expects exactly one row back
+            // The lambda (row mapper) reads each column and builds a Profile object
+            return jdbcTemplate.queryForObject(
+                    sql,
+                    (resultSet, rowNum) -> {
+                        Profile profile = new Profile();
+                        profile.setProfileId(resultSet.getInt("profile_id"));
+                        profile.setUserId(resultSet.getInt("user_id"));
+                        profile.setFirstName(resultSet.getString("first_name"));
+                        profile.setLastName(resultSet.getString("last_name"));
+                        profile.setPhone(resultSet.getString("phone"));
+                        profile.setAddressLine(resultSet.getString("address_line"));
+                        profile.setCity(resultSet.getString("city"));
+                        profile.setState(resultSet.getString("state"));
+                        profile.setPostalCode(resultSet.getString("postal_code"));
+                        profile.setCountry(resultSet.getString("country"));
+                        profile.setBio(resultSet.getString("bio"));
+                        return profile;
+                    },
+                    userId
+            );
+        } catch (Exception exception) {
+            // Return null if no profile is found for the given user ID
+            return null;
+        }
+    }
 }

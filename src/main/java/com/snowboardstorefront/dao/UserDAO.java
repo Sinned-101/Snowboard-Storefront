@@ -105,4 +105,33 @@ public class UserDAO {
             return null;
         }
     }
+
+    public User findById(int userId) {
+
+        // SQL query to get all user columns for the given user ID
+        String sql = """
+                SELECT user_id, username, email, password_hash, role
+                FROM users
+                WHERE user_id = ?
+                """;
+
+        try {
+            // queryForObject runs the query and expects exactly one row back
+            // The lambda reads each column and builds a User object
+            return jdbcTemplate.queryForObject(
+                    sql,
+                    (resultSet, rowNum) -> new User(
+                            resultSet.getInt("user_id"),
+                            resultSet.getString("username"),
+                            resultSet.getString("email"),
+                            resultSet.getString("password_hash"),
+                            resultSet.getString("role")
+                    ),
+                    userId
+            );
+        } catch (Exception exception) {
+            // Return null if no user is found for the given ID
+            return null;
+        }
+    }
 }

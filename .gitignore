@@ -30,3 +30,6 @@ Thumbs.db
 # Local config / secrets (DB credentials)
 *.env
 config.local.properties
+
+# Local-only files (not for version control)
+Reviews - Local Only/
