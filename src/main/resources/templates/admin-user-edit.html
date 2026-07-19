@@ -1,0 +1,121 @@
+<!--
+    File: admin-user-edit.html
+    Description: Admin edit user page - edit a user's profile and change their role
+    Author: Dennis Feldbruegge
+    Date Created: July 18, 2026
+    Last Updated: July 18, 2026
+-->
+
+<!DOCTYPE html>
+<!-- xmlns:th tells Thymeleaf to process th: attributes in this file -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <h1 class="site-title">Black Diamond Gear</h1>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/admin-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Edit User</h2>
+        <!-- Shows the username of the account being edited -->
+        <p>Editing account: <strong th:text="${user.username}">username</strong></p>
+    </section>
+
+    <section class="form-section">
+
+        <!-- Form submits to POST /admin/users/edit/{userId} with the user ID in the URL -->
+        <form class="account-form-wide" th:action="@{/admin/users/edit/{id}(id=${user.userId})}" method="post">
+            <h2>Account Details</h2>
+
+            <!-- Role dropdown - th:selected marks the user's current role as selected -->
+            <p>
+                <label for="role">Role</label>
+                <select id="role" name="role" required>
+                    <option value="customer" th:selected="${user.role == 'customer'}">Customer</option>
+                    <option value="expert"   th:selected="${user.role == 'expert'}">Expert</option>
+                    <option value="admin"    th:selected="${user.role == 'admin'}">Admin</option>
+                </select>
+            </p>
+
+            <h2>Profile Information</h2>
+
+            <!-- th:value pre-fills each input with the user's current profile value -->
+            <p>
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" th:value="${profile.firstName}" required>
+            </p>
+
+            <p>
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" th:value="${profile.lastName}" required>
+            </p>
+
+            <p>
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" th:value="${profile.phone}">
+            </p>
+
+            <p>
+                <label for="address_line">Street Address</label>
+                <input type="text" id="address_line" name="address_line" th:value="${profile.addressLine}">
+            </p>
+
+            <p>
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" th:value="${profile.city}">
+            </p>
+
+            <p>
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" th:value="${profile.state}">
+            </p>
+
+            <p>
+                <label for="postal_code">Postal Code</label>
+                <input type="text" id="postal_code" name="postal_code" th:value="${profile.postalCode}">
+            </p>
+
+            <p>
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" th:value="${profile.country}">
+            </p>
+
+            <p>
+                <label for="bio">Bio</label>
+                <input type="text" id="bio" name="bio" th:value="${profile.bio}">
+            </p>
+
+            <p class="form-actions">
+                <button type="submit" class="button">Save Changes</button>
+                <!-- Cancel goes back to the user list without saving -->
+                <a th:href="@{/admin/users}" class="button">Cancel</a>
+            </p>
+
+        </form>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

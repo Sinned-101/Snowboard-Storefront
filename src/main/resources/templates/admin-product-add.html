@@ -1,0 +1,93 @@
+<!--
+    File: admin-product-add.html
+    Description: Form for adding a new product to the catalog
+    Author: Dennis Feldbruegge
+    Date Created: July 18, 2026
+    Last Updated: July 18, 2026
+-->
+
+<!DOCTYPE html>
+<!-- xmlns:th tells Thymeleaf to process th: attributes in this file -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <h1 class="site-title">Black Diamond Gear</h1>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/admin-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Add New Product</h2>
+        <p>Fill in the details below to add a product to the catalog</p>
+    </section>
+
+    <section class="form-section">
+
+        <!-- Form submits to POST /admin/products/add in AdminProductController -->
+        <form class="account-form-wide" th:action="@{/admin/products/add}" method="post">
+            <h2>New Product</h2>
+
+            <!-- Category dropdown populated from the categories list in the model -->
+            <p>
+                <label for="categoryId">Category</label>
+                <select id="categoryId" name="categoryId" required>
+                    <!-- th:each creates one option per category from the database -->
+                    <option th:each="category : ${categories}"
+                            th:value="${category.categoryId}"
+                            th:text="${category.categoryName}">Category</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="name">Product Name</label>
+                <input type="text" id="name" name="name" required>
+            </p>
+
+            <p>
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" required>
+            </p>
+
+            <p>
+                <label for="price">Price</label>
+                <input type="number" id="price" name="price" step="0.01" min="0" required>
+            </p>
+
+            <p>
+                <label for="stockQuantity">Stock Quantity</label>
+                <input type="number" id="stockQuantity" name="stockQuantity" min="0" required>
+            </p>
+
+            <p class="form-actions">
+                <button type="submit" class="button">Add Product</button>
+                <!-- Cancel goes back to the product management page without saving -->
+                <a th:href="@{/admin/products}" class="button">Cancel</a>
+            </p>
+
+        </form>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

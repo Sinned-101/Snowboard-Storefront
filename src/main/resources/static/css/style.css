@@ -435,6 +435,121 @@ footer {
     margin-bottom: 15px;
 }
 
+/* Admin management table section */
+.admin-section {
+    padding: 3% 0;
+    background: linear-gradient(to right, #03170d, #111, #03170d);
+    box-sizing: border-box;
+}
+
+/* Centers the table at 90% of the screen width */
+.admin-section-inner {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Admin management tables */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f4f4f4;
+    color: #111;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-top: 1.25rem;
+    border: 2px solid #20e878;
+}
+
+/* Admin table header row */
+.admin-table th {
+    background-color: #0b5f32;
+    color: #fff;
+    padding: 0.875rem 1.125rem;
+    text-align: left;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-right: 1px solid #1a7a40;
+}
+
+/* Remove right border from the last header cell */
+.admin-table th:last-child {
+    border-right: none;
+}
+
+/* Admin table cells */
+.admin-table td {
+    padding: 0.75rem 1.125rem;
+    border-bottom: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    vertical-align: middle;
+}
+
+/* Remove right border from the last cell in each row */
+.admin-table td:last-child {
+    border-right: none;
+}
+
+/* Remove bottom border from the last row */
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Alternate row shading for readability */
+.admin-table tr:nth-child(even) {
+    background-color: #e8f8ef;
+}
+
+/* Row highlight on hover */
+.admin-table tr:hover {
+    background-color: #d4f5e6;
+}
+
+/* Wider form variant for pages with many fields like profile edit and admin edit */
+.account-form-wide {
+    max-width: min(700px, 90%);
+    margin: 0 auto;
+    background-color: #f4f4f4;
+    color: #111;
+    padding: 2.2rem;
+    border-radius: 0.5rem;
+    border-left: 0.375rem solid #20e878;
+}
+
+.account-form-wide h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #111;
+}
+
+.account-form-wide label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.375rem;
+}
+
+.account-form-wide input,
+.account-form-wide select,
+.account-form-wide textarea {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid #999;
+    border-radius: 0.3125rem;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Dropdown select styling for forms */
+.account-form select {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid #999;
+    border-radius: 0.3125rem;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+}
+
 /* Adjusts layout for tablets and smaller screens */
 @media screen and (max-width: 768px) {
     .navbar {

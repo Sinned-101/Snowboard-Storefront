@@ -1,0 +1,70 @@
+<!--
+    File: admin-category-add.html
+    Description: Form for adding a new product category
+    Author: Dennis Feldbruegge
+    Date Created: July 18, 2026
+    Last Updated: July 18, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <h1 class="site-title">Black Diamond Gear</h1>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/admin-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Add New Category</h2>
+        <p>Create a new product category for the storefront</p>
+    </section>
+
+    <section class="form-section">
+
+        <!-- Form submits to POST /admin/categories/add in AdminCategoryController -->
+        <form class="account-form" th:action="@{/admin/categories/add}" method="post">
+            <h2>New Category</h2>
+
+            <p>
+                <label for="name">Category Name</label>
+                <input type="text" id="name" name="name" required>
+            </p>
+
+            <p>
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description">
+            </p>
+
+            <p class="form-actions">
+                <button type="submit" class="button">Add Category</button>
+                <a th:href="@{/admin/categories}" class="button">Cancel</a>
+            </p>
+
+        </form>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

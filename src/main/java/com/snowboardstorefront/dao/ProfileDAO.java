@@ -103,4 +103,37 @@ public class ProfileDAO {
             return null;
         }
     }
+
+    // Update all editable profile fields for the user with the matching user_id
+    public void updateProfile(Profile profile) {
+
+        // SQL updates every profile field for the user matching the given user_id
+        String sql = """
+                UPDATE profile
+                SET first_name   = ?,
+                    last_name    = ?,
+                    phone        = ?,
+                    address_line = ?,
+                    city         = ?,
+                    state        = ?,
+                    postal_code  = ?,
+                    country      = ?,
+                    bio          = ?
+                WHERE user_id = ?
+                """;
+
+        jdbcTemplate.update(
+                sql,
+                profile.getFirstName(),
+                profile.getLastName(),
+                profile.getPhone(),
+                profile.getAddressLine(),
+                profile.getCity(),
+                profile.getState(),
+                profile.getPostalCode(),
+                profile.getCountry(),
+                profile.getBio(),
+                profile.getUserId()
+        );
+    }
 }

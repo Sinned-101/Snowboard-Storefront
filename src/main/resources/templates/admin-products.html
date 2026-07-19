@@ -1,0 +1,88 @@
+<!--
+    File: admin-products.html
+    Description: Admin product management page - lists all products with edit and delete options
+    Author: Dennis Feldbruegge
+    Date Created: July 18, 2026
+    Last Updated: July 18, 2026
+-->
+
+<!DOCTYPE html>
+<!-- xmlns:th tells Thymeleaf to process th: attributes in this file -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Products | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <h1 class="site-title">Black Diamond Gear</h1>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/admin-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Manage Products</h2>
+        <p>Add new products or edit and delete existing ones</p>
+    </section>
+
+    <section class="admin-section">
+        <div class="admin-section-inner">
+
+        <!-- Button to navigate to the add product form -->
+        <div class="form-actions">
+            <a th:href="@{/admin/products/add}" class="button">Add New Product</a>
+        </div>
+
+        <!-- Table listing every product with edit and delete buttons on each row -->
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- th:each loops over the products list and creates one row per product -->
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.productId}">0</td>
+                    <td th:text="${product.productName}">Name</td>
+                    <td th:text="${product.categoryName}">Category</td>
+                    <td th:text="${product.price}">0.00</td>
+                    <td th:text="${product.stockQuantity}">0</td>
+                    <td>
+                        <!-- Edit link passes the product ID in the URL -->
+                        <a th:href="@{/admin/products/edit/{id}(id=${product.productId})}" class="button">Edit</a>
+
+                        <!-- Delete uses a form with POST because links only send GET requests -->
+                        <form th:action="@{/admin/products/delete/{id}(id=${product.productId})}" method="post" style="display:inline;">
+                            <button type="submit" class="button">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        </div>
+    </section>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

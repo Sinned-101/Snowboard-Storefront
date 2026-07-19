@@ -7,7 +7,7 @@
 -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Basic page setup -->
     <meta charset="UTF-8">
@@ -30,8 +30,13 @@
             <li><a href="/">Home</a></li>
             <li><a href="/products">Products</a></li>
             <li><a href="/messages">Expert Help</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register</a></li>
+            <!-- Show Dashboard + Logout if a session exists, otherwise show Login + Register -->
+            <li th:if="${session.user_id != null}">
+                <a th:href="${session.role == 'admin'} ? '/admin-dashboard' : (${session.role == 'expert'} ? '/expert-dashboard' : '/customer-dashboard')">Dashboard</a>
+            </li>
+            <li th:if="${session.user_id != null}"><a href="/logout">Logout</a></li>
+            <li th:unless="${session.user_id != null}"><a href="/login">Login</a></li>
+            <li th:unless="${session.user_id != null}"><a href="/register">Register</a></li>
         </ul>
     </nav>
 </header>

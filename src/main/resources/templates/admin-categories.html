@@ -1,0 +1,84 @@
+<!--
+    File: admin-categories.html
+    Description: Admin category management page - lists all categories with edit and delete options
+    Author: Dennis Feldbruegge
+    Date Created: July 18, 2026
+    Last Updated: July 18, 2026
+-->
+
+<!DOCTYPE html>
+<!-- xmlns:th tells Thymeleaf to process th: attributes in this file -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Categories | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <h1 class="site-title">Black Diamond Gear</h1>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/admin-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Manage Categories</h2>
+        <p>Add new product categories or edit and delete existing ones</p>
+    </section>
+
+    <section class="admin-section">
+        <div class="admin-section-inner">
+
+        <!-- Button to navigate to the add category form -->
+        <div class="form-actions">
+            <a th:href="@{/admin/categories/add}" class="button">Add New Category</a>
+        </div>
+
+        <!-- Table listing every category with edit and delete buttons on each row -->
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- th:each loops over the categories list and creates one row per category -->
+                <tr th:each="category : ${categories}">
+                    <td th:text="${category.categoryId}">0</td>
+                    <td th:text="${category.categoryName}">Name</td>
+                    <td th:text="${category.description}">Description</td>
+                    <td>
+                        <!-- Edit link passes the category ID in the URL -->
+                        <a th:href="@{/admin/categories/edit/{id}(id=${category.categoryId})}" class="button">Edit</a>
+
+                        <!-- Delete uses a form with POST because links only send GET requests -->
+                        <form th:action="@{/admin/categories/delete/{id}(id=${category.categoryId})}" method="post" style="display:inline;">
+                            <button type="submit" class="button">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        </div>
+    </section>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
