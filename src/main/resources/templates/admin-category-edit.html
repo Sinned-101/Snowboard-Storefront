@@ -1,0 +1,71 @@
+<!--
+    File: admin-category-edit.html
+    Description: Form for editing an existing product category - pre-filled with current values
+    Author: Dennis Feldbruegge
+    Date Created: July 18, 2026
+    Last Updated: July 18, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Category | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <h1 class="site-title">Black Diamond Gear</h1>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/admin-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Edit Category</h2>
+        <p>Update the category details and save your changes</p>
+    </section>
+
+    <section class="form-section">
+
+        <!-- Form submits to POST /admin/categories/edit/{categoryId} with the category ID in the URL -->
+        <form class="account-form" th:action="@{/admin/categories/edit/{id}(id=${category.categoryId})}" method="post">
+            <h2>Edit Category</h2>
+
+            <!-- th:value pre-fills each input with the category's current value from the database -->
+            <p>
+                <label for="name">Category Name</label>
+                <input type="text" id="name" name="name" th:value="${category.categoryName}" required>
+            </p>
+
+            <p>
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" th:value="${category.description}">
+            </p>
+
+            <p class="form-actions">
+                <button type="submit" class="button">Save Changes</button>
+                <a th:href="@{/admin/categories}" class="button">Cancel</a>
+            </p>
+
+        </form>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

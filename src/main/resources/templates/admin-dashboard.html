@@ -69,21 +69,28 @@
                 <span th:text="${profile.bio}">Bio</span>
             </p>
 
-            <a th:href="@{/profile}" class="button">View Profile</a>
+            <a th:href="@{/profile}" class="button">Edit Profile</a>
         </article>
 
-        <!-- User summary - will be wired to real counts in a future milestone -->
+        <!-- User summary - links to the admin user management page -->
         <article class="dashboard-card">
             <h3>User Summary</h3>
-            <p>User counts and management will appear here in a future milestone.</p>
-            <a href="#" class="button">Manage Users</a>
+            <p>View all registered accounts, edit their profiles, or change their roles.</p>
+            <a th:href="@{/admin/users}" class="button">Manage Users</a>
         </article>
 
-        <!-- Product summary - will be wired to real counts in a future milestone -->
+        <!-- Product summary - links to the admin product management page -->
         <article class="dashboard-card">
             <h3>Product Summary</h3>
-            <p>Product and category counts will appear here in a future milestone.</p>
-            <a th:href="@{/products}" class="button">Manage Products</a>
+            <p>Add new products to the catalog or edit and delete existing ones.</p>
+            <a th:href="@{/admin/products}" class="button">Manage Products</a>
+        </article>
+
+        <!-- Category management - links to the admin category management page -->
+        <article class="dashboard-card">
+            <h3>Category Management</h3>
+            <p>Add new product categories or edit and delete existing ones.</p>
+            <a th:href="@{/admin/categories}" class="button">Manage Categories</a>
         </article>
 
         <!-- Order summary - will be wired to real data in the orders milestone -->

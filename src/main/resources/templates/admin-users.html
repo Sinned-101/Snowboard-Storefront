@@ -1,0 +1,76 @@
+<!--
+    File: admin-users.html
+    Description: Admin user management page - lists all registered accounts
+    Author: Dennis Feldbruegge
+    Date Created: July 18, 2026
+    Last Updated: July 18, 2026
+-->
+
+<!DOCTYPE html>
+<!-- xmlns:th tells Thymeleaf to process th: attributes in this file -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <h1 class="site-title">Black Diamond Gear</h1>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/admin-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Manage Users</h2>
+        <p>View all registered accounts and edit profiles or change roles</p>
+    </section>
+
+    <section class="admin-section">
+        <div class="admin-section-inner">
+
+        <!-- Table listing every user account with an edit button on each row -->
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- th:each loops over the users list and creates one row per user -->
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.userId}">0</td>
+                    <td th:text="${user.username}">username</td>
+                    <td th:text="${user.email}">email</td>
+                    <td th:text="${user.role}">role</td>
+                    <td>
+                        <!-- Edit link passes the user ID in the URL to the edit form -->
+                        <a th:href="@{/admin/users/edit/{id}(id=${user.userId})}" class="button">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        </div>
+    </section>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

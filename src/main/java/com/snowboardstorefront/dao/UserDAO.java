@@ -12,6 +12,8 @@ import com.snowboardstorefront.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Handles database operations for the users table
  */
@@ -133,5 +135,42 @@ public class UserDAO {
             // Return null if no user is found for the given ID
             return null;
         }
+    }
+
+    // Get every user account from the database for the admin user list page
+    public List<User> findAllUsers() {
+
+        // SQL selects all users ordered alphabetically by username
+        String sql = """
+                SELECT user_id, username, email, password_hash, role
+                FROM users
+                ORDER BY username
+                """;
+
+        return jdbcTemplate.query(sql, (resultSet, rowNum) -> new User(
+                resultSet.getInt("user_id"),
+                resultSet.getString("username"),
+                resultSet.getString("email"),
+                resultSet.getString("password_hash"),
+                resultSet.getString("role")
+        ));
+    }
+
+    // Replace the stored password hash with a newly generated BCrypt hash
+    public void updatePassword(int userId, String newPasswordHash) {
+
+        // SQL updates only the password_hash column for the matching user
+        String sql = "UPDATE users SET password_hash = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, newPasswordHash, userId);
+    }
+
+    // Change the role of a user account - used by admin to promote or demote users
+    public void updateRole(int userId, String role) {
+
+        // SQL updates only the role column for the matching user
+        String sql = "UPDATE users SET role = ? WHERE user_id = ?";
+
+        jdbcTemplate.update(sql, role, userId);
     }
 }
