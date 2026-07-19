@@ -1,0 +1,112 @@
+<!--
+    File: admin-dashboard.html
+    Description: Admin dashboard Thymeleaf template
+    Author: Dennis Feldbruegge
+    Date Created: July 18, 2026
+    Last Updated: July 18, 2026
+-->
+
+<!DOCTYPE html>
+<!-- xmlns:th tells Thymeleaf to process th: attributes in this file -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Black Diamond Gear</title>
+
+    <!-- th:href="@{...}" lets Thymeleaf build the correct path to the CSS file -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Nav links use Spring Boot routes, not .html file paths -->
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/admin-dashboard}">Dashboard</a></li>
+            <!-- Logout hits the /logout route which invalidates the session -->
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <section class="page-heading">
+        <h2>Admin Dashboard</h2>
+        <p>Manage store users, products, categories, orders, carts, conversations, and messages</p>
+    </section>
+
+    <section class="dashboard-section">
+
+        <!-- Profile card - data comes from the profile and user objects in the model -->
+        <article class="dashboard-card">
+            <h3>Admin Profile</h3>
+
+            <!-- th:text replaces the placeholder text with real data from the model -->
+            <p><strong>Name:</strong>
+                <span th:text="${profile.firstName + ' ' + profile.lastName}">Full Name</span>
+            </p>
+            <p><strong>Username:</strong>
+                <span th:text="${user.username}">username</span>
+            </p>
+            <p><strong>Email:</strong>
+                <span th:text="${user.email}">email</span>
+            </p>
+            <p><strong>Role:</strong>
+                <span th:text="${user.role}">role</span>
+            </p>
+            <p><strong>Location:</strong>
+                <span th:text="${profile.city + ', ' + profile.state}">City, State</span>
+            </p>
+            <p><strong>Bio:</strong>
+                <span th:text="${profile.bio}">Bio</span>
+            </p>
+
+            <a th:href="@{/profile}" class="button">View Profile</a>
+        </article>
+
+        <!-- User summary - will be wired to real counts in a future milestone -->
+        <article class="dashboard-card">
+            <h3>User Summary</h3>
+            <p>User counts and management will appear here in a future milestone.</p>
+            <a href="#" class="button">Manage Users</a>
+        </article>
+
+        <!-- Product summary - will be wired to real counts in a future milestone -->
+        <article class="dashboard-card">
+            <h3>Product Summary</h3>
+            <p>Product and category counts will appear here in a future milestone.</p>
+            <a th:href="@{/products}" class="button">Manage Products</a>
+        </article>
+
+        <!-- Order summary - will be wired to real data in the orders milestone -->
+        <article class="dashboard-card">
+            <h3>Order Summary</h3>
+            <p>Order counts and status will appear here once the orders feature is built.</p>
+            <a th:href="@{/orders}" class="button">View Orders</a>
+        </article>
+
+        <!-- Message summary - will be wired to real data in the messaging milestone -->
+        <article class="dashboard-card">
+            <h3>Message Summary</h3>
+            <p>Conversation and message counts will appear here once messaging is built.</p>
+            <a th:href="@{/messages}" class="button">View Messages</a>
+        </article>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

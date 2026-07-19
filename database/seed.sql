@@ -21,12 +21,12 @@ USE snowboard_storefront;
 -- Placeholder hash represents the password noted in the comment.
 -- ----------------------------------------------------------------------------
 INSERT INTO users (user_id, username, email, password_hash, role) VALUES
-    (1, 'admin',     'admin@summitgear.test',  '$2b$12$DEVPLACEHOLDERhashADMIN0000000000000000000000000000', 'admin'),    -- pw: admin123
-    (2, 'expert_kai','kai@summitgear.test',    '$2b$12$DEVPLACEHOLDERhashEXPERT100000000000000000000000000', 'expert'),   -- pw: expert123
-    (3, 'expert_sam','sam@summitgear.test',    '$2b$12$DEVPLACEHOLDERhashEXPERT200000000000000000000000000', 'expert'),   -- pw: expert123
-    (4, 'jordan',    'jordan@example.test',    '$2b$12$DEVPLACEHOLDERhashCUST10000000000000000000000000000', 'customer'), -- pw: pass123
-    (5, 'mia',       'mia@example.test',       '$2b$12$DEVPLACEHOLDERhashCUST20000000000000000000000000000', 'customer'), -- pw: pass123
-    (6, 'leo',       'leo@example.test',       '$2b$12$DEVPLACEHOLDERhashCUST30000000000000000000000000000', 'customer'); -- pw: pass123
+    (1, 'admin',     'admin@summitgear.test',  '$2a$10$zNtfqcd7O2IFFgEm6HJcDeXsWuFP7tSRFW5DNllgdYdfU/OZRbbNW', 'admin'),    -- pw: admin123
+    (2, 'expert_kai','kai@summitgear.test',    '$2a$10$f1uvU11ARFuV/gJk9otcc.1YHhre/n/U03EurCuecNnEsRdeaSnVK', 'expert'),   -- pw: expert123
+    (3, 'expert_sam','sam@summitgear.test',    '$2a$10$f1uvU11ARFuV/gJk9otcc.1YHhre/n/U03EurCuecNnEsRdeaSnVK', 'expert'),   -- pw: expert123
+    (4, 'jordan',    'jordan@example.test',    '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'), -- pw: pass123
+    (5, 'mia',       'mia@example.test',       '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'), -- pw: pass123
+    (6, 'leo',       'leo@example.test',       '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'); -- pw: pass123
 
 -- ----------------------------------------------------------------------------
 -- profile  (one per user)
