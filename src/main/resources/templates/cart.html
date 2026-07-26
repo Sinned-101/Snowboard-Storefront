@@ -1,0 +1,115 @@
+<!--
+    File: cart.html
+    Description: Shopping cart page for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 14, 2026
+    Last Updated: June 17, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name/title -->
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/messages">Expert Help</a></li>
+            <li><a href="/customer-dashboard">Dashboard</a></li>
+            <li><a href="/login">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Shopping Cart</h2>
+
+        <p>
+            Review the products in your cart before continuing to checkout
+        </p>
+    </section>
+
+    <!-- Cart information -->
+    <section class="dashboard-section">
+
+        <!-- Shows a message if the cart is empty -->
+        <p th:if="${cartItems.isEmpty()}">
+            Your cart is currently empty.
+        </p>
+
+        <!-- Displays cart items if the cart has products -->
+        <section th:if="${!cartItems.isEmpty()}" class="cart-items">
+
+            <!-- Shows one cart item for each item sent from CartController -->
+            <article class="dashboard-card" th:each="item : ${cartItems}">
+                <h3 th:text="${item.productName}">Product Name</h3>
+
+                <p><strong>Product ID:</strong> <span th:text="${item.productId}">0</span></p>
+                <p><strong>Price:</strong> <span th:text="${'$' + item.price}">$0.00</span></p>
+
+                <!-- Updates the quantity for the selected cart item -->
+                <form action="/cart/update" method="post">
+                    <input type="hidden" name="cartItemId" th:value="${item.cartItemId}">
+
+                    <label>
+                        <strong>Quantity:</strong>
+                        <input type="number"
+                               name="quantity"
+                               th:value="${item.quantity}"
+                               min="0">
+                    </label>
+
+                    <button type="submit" class="button secondary">Update</button>
+                </form>
+
+                <p><strong>Item Total:</strong> <span th:text="${'$' + item.lineTotal}">$0.00</span></p>
+
+                <!-- Removes the selected item from the cart -->
+                <form action="/cart/remove" method="post">
+                    <input type="hidden" name="cartItemId" th:value="${item.cartItemId}">
+                    <button type="submit" class="button secondary">Remove</button>
+                </form>
+            </article>
+
+            <!-- Cart summary -->
+            <article class="dashboard-card">
+                <h3>Cart Summary</h3>
+
+                <p><strong>Cart Total:</strong> <span th:text="${'$' + cartTotal}">$0.00</span></p>
+
+                <p class="form-actions">
+                    <a href="/checkout" class="button">Checkout</a>
+                    <a href="/products" class="button secondary">Continue Shopping</a>
+                </p>
+            </article>
+        </section>
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
     Description: Product details page for the Black Diamond Gear web application
     Author: Zach Christianson
     Date Created: June 11, 2026
-    Last Updated: July 14, 2026
+    Last Updated: July 26, 2026
 -->
 
 <!DOCTYPE html>
@@ -65,11 +65,15 @@
             <p th:text="${'Stock Quantity: ' + product.stockQuantity}">Stock Quantity: 0</p>
 
             <!-- Product action links -->
-            <p class="product-actions">
-                <a href="/cart" class="button">Add to Cart</a>
+            <section class="product-actions">
+                <form action="/cart/add" method="post">
+                    <input type="hidden" name="productId" th:value="${product.productId}">
+                    <button type="submit" class="button">Add to Cart</button>
+                </form>
+
                 <a href="/messages" class="button secondary">Ask an Expert</a>
                 <a href="/products" class="button secondary">Back to Products</a>
-            </p>
+            </section>
         </article>
     </section>
 
