@@ -24,7 +24,7 @@ Each role lands on a dashboard built for them.
 
 1. **Presentation** — HTML, CSS, JavaScript, and Thymeleaf templates for the home page, registration, login, product pages,
    product details, cart, checkout, dashboards, and messaging
-2. **Logic** — Java with Spring Boot controllers, authentication, routing, registration, logout, order processing, and messaging
+2. **Logic** — Java with Spring Boot controllers, authentication, routing, registration, logout, dashboard navigation, product browsing, admin product/category/user management, profile editing, password changes, shopping cart management, checkout, order processing, and messaging
 3. **Data** — MySQL database with ten tables
 
 ## Tech Stack
@@ -36,7 +36,7 @@ Each role lands on a dashboard built for them.
 
 ## Frontend Pages
 
-The initial frontend webpage templates have been added using HTML and CSS. These pages are currently static templates, but their sample content is aligned with the current MySQL schema and seed data.
+The initial frontend webpage templates were created with HTML and CSS, and several pages have now been connected to the Spring Boot backend using Thymeleaf. Product pages, cart pages, checkout, dashboard navigation, profile pages, and admin management pages use Spring Boot routes instead of opening static HTML files directly. 
 
 Added pages include:
 
@@ -49,16 +49,21 @@ Added pages include:
 * Expert dashboard
 * Admin dashboard
 * Profile page
+* Change password page
 * Cart page
 * Checkout page
+* Order confirmation page
 * Orders page
 * Messages page
+* Admin product management pages
+* Admin category management pages
+* Admin user management pages
 
 The product names, categories, prices, cart items, orders, user profiles, and message examples shown on the pages are based on the sample records in `database/seed.sql`.
 
 ## Spring Boot Backend
 
-The project now includes an initial Spring Boot Maven setup. The application can run locally through Spring Boot and uses controller routes to display pages instead of opening static HTML files directly.
+The project now includes a Spring Boot Maven backend. The application runs locally through Spring Boot and uses controller routes to display pages instead of opening static HTML files directly.
 
 Current backend features include:
 
@@ -71,8 +76,27 @@ Current backend features include:
 * Session-based login tracking
 * Logout route that ends the current user session
 * Error messages for failed registration and login attempts
+* Role-based dashboard navigation for customers, experts, and administrators
+* Database-backed product listing page
+* Database-backed product detail pages
+* Category filtering for storefront products
+* Admin product management
+* Admin category management
+* Admin user management
+* Profile editing
+* Password change page
+* Shopping cart page connected to the cart and cart_items tables
+* Add-to-cart functionality from product detail pages
+* Cart item removal
+* Cart quantity updates
+* Cart total calculation
+* Checkout page connected to the logged-in customers cart
+* Shipping information displayed from the profile table
+* Order placement using the orders and order_items tables
+* Cart clearing after checkout
+* Order confirmation page after a successful purchase 
 
-Additional backend work will continue as dashboards, product pages, cart features, orders, and messaging are connected to the database.
+Additional backend work will continue as customer order history, order details, administrator order review, and messaging are connected to the database.
 
 
 ## Database
