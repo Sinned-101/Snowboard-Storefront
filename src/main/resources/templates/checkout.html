@@ -1,0 +1,158 @@
+<!--
+    File: checkout.html
+    Description: Checkout page for the Black Diamond Gear web application
+    Author: Zach Christianson
+    Date Created: June 14, 2026
+    Last Updated: July 26, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name/title -->
+        <h1 class="site-title">Black Diamond Gear</h1>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/messages">Expert Help</a></li>
+            <li><a href="/customer-dashboard">Dashboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Checkout</h2>
+
+        <p>
+            Review your shipping information and order summary before placing your order.
+        </p>
+    </section>
+
+    <!-- Checkout area -->
+    <section class="dashboard-section">
+
+        <!-- Shows a message if the cart is empty -->
+        <article class="dashboard-card" th:if="${cartItems.isEmpty()}">
+            <h3>Empty Cart</h3>
+
+            <p>Your cart is currently empty.</p>
+
+            <a href="/products" class="button">Continue Shopping</a>
+        </article>
+
+        <!-- Displays checkout information if the cart has products -->
+        <section th:if="${!cartItems.isEmpty()}">
+
+            <!-- Shipping information from the logged-in user's profile -->
+            <article class="dashboard-card" th:if="${profile != null}">
+                <h3>Shipping Information</h3>
+
+                <p>
+                    <strong>Name:</strong>
+                    <span th:text="${profile.firstName + ' ' + profile.lastName}">Customer Name</span>
+                </p>
+
+                <p>
+                    <strong>Address:</strong>
+                    <span th:text="${profile.addressLine}">Address</span>
+                </p>
+
+                <p>
+                    <strong>City:</strong>
+                    <span th:text="${profile.city}">City</span>
+                </p>
+
+                <p>
+                    <strong>State:</strong>
+                    <span th:text="${profile.state}">State</span>
+                </p>
+
+                <p>
+                    <strong>Postal Code:</strong>
+                    <span th:text="${profile.postalCode}">Postal Code</span>
+                </p>
+
+                <p>
+                    <strong>Country:</strong>
+                    <span th:text="${profile.country}">Country</span>
+                </p>
+            </article>
+
+            <!-- Order items -->
+            <article class="dashboard-card">
+                <h3>Order Items</h3>
+
+                <!-- Shows one checkout item for each item sent from CheckoutController -->
+                <section th:each="item : ${cartItems}">
+                    <p>
+                        <strong th:text="${item.productName}">Product Name</strong>:
+                        <span th:text="${item.quantity}">1</span>
+                        ×
+                        <span th:text="${'$' + item.price}">$0.00</span>
+                        =
+                        <span th:text="${'$' + item.lineTotal}">$0.00</span>
+                    </p>
+                </section>
+            </article>
+
+            <!-- Order summary -->
+            <article class="dashboard-card">
+                <h3>Order Summary</h3>
+
+                <p>
+                    <strong>Order Total:</strong>
+                    <span th:text="${'$' + cartTotal}">$0.00</span>
+                </p>
+
+                <p><strong>Status:</strong> Pending</p>
+
+                <p>
+                    After placing your order, you will be able to view it from your orders page
+                    and track its status as it is processed.
+                </p>
+
+                <!-- Checkout action buttons -->
+                <section class="form-actions">
+
+                    <!-- Places the customer order -->
+                    <form action="/checkout/place-order" method="post">
+                        <button type="submit" class="button">Place Order</button>
+                    </form>
+
+                    <a href="/cart" class="button secondary">Back to Cart</a>
+                </section>
+            </article>
+
+        </section>
+
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
