@@ -58,29 +58,29 @@ INSERT INTO category (category_id, name, description) VALUES
 -- ----------------------------------------------------------------------------
 INSERT INTO product (product_id, category_id, name, description, price, stock_quantity, image_url) VALUES
     -- Snowboards
-    (1,  1, 'Summit All-Mountain 156',  'Versatile all-mountain board, 156cm.',          449.99, 20, NULL),
-    (2,  1, 'Powder Hound 162W',        'Wide directional powder board, 162cm.',         529.99, 12, NULL),
+    (1,  1, 'Summit All-Mountain 156',  'Versatile all-mountain board, 156cm.',          449.99, 20, '/images/summit-all-mountain-156.jpg' ),
+    (2,  1, 'Powder Hound 162W',        'Wide directional powder board, 162cm.',         529.99, 12, '/images/powder-hound-162w.jpg'),
     -- Boots
-    (3,  2, 'Glacier Boa Boots',        'Medium-flex boots with Boa lacing.',            259.99, 30, NULL),
-    (4,  2, 'Park Flex Boots',          'Soft-flex boots for freestyle riders.',         219.99, 25, NULL),
+    (3,  2, 'Glacier Boa Boots',        'Medium-flex boots with Boa lacing.',            259.99, 30, '/images/glacier-boa-boots.jpg'),
+    (4,  2, 'Park Flex Boots',          'Soft-flex boots for freestyle riders.',         219.99, 25, '/images/park-flex-boots.jpg'),
     -- Bindings
-    (5,  3, 'Ridge Lock Bindings',      'All-mountain bindings, medium flex.',           189.99, 28, NULL),
-    (6,  3, 'FreeFlex Pro Bindings',    'Responsive bindings for advanced riders.',      229.99, 18, NULL),
+    (5,  3, 'Ridge Lock Bindings',      'All-mountain bindings, medium flex.',           189.99, 28, '/images/ridge-lock-bindings.jpg'),
+    (6,  3, 'FreeFlex Pro Bindings',    'Responsive bindings for advanced riders.',      229.99, 18, '/images/free-flex-pro-bindings.jpg'),
     -- Helmets
-    (7,  4, 'Crest Snow Helmet',        'Lightweight helmet with adjustable vents.',      99.99, 40, NULL),
-    (8,  4, 'Guard MIPS Helmet',        'Helmet with MIPS impact protection.',           139.99, 22, NULL),
+    (7,  4, 'Crest Snow Helmet',        'Lightweight helmet with adjustable vents.',      99.99, 40, '/images/crest-snow-helmet.jpg'),
+    (8,  4, 'Guard MIPS Helmet',        'Helmet with MIPS impact protection.',           139.99, 22, '/images/guard-mips-helmet.jpg'),
     -- Goggles
-    (9,  5, 'Vista Wide Goggles',       'Wide-view goggles with anti-fog lens.',          89.99, 35, NULL),
-    (10, 5, 'Storm Low-Light Goggles',  'Low-light lens for overcast days.',              79.99, 27, NULL),
+    (9,  5, 'Vista Wide Goggles',       'Wide-view goggles with anti-fog lens.',          89.99, 35, '/images/vista-wide-goggles.jpg'),
+    (10, 5, 'Storm Low-Light Goggles',  'Low-light lens for overcast days.',              79.99, 27, '/images/storm-low-light-goggles.jpg'),
     -- Jackets
-    (11, 6, 'Alpine Shell Jacket',      'Waterproof 3-layer shell jacket.',              199.99, 24, NULL),
-    (12, 6, 'Insulated Summit Jacket',  'Warm insulated jacket for cold days.',          229.99, 16, NULL),
+    (11, 6, 'Alpine Shell Jacket',      'Waterproof 3-layer shell jacket.',              199.99, 24, '/images/alpine-shell-jacket.jpg'),
+    (12, 6, 'Insulated Summit Jacket',  'Warm insulated jacket for cold days.',          229.99, 16, '/images/insulated-summit-jacket.jpg'),
     -- Gloves
-    (13, 7, 'Frostline Gloves',         'Insulated waterproof gloves.',                   59.99, 50, NULL),
-    (14, 7, 'Summit Mittens',           'Extra-warm mittens for deep cold.',              64.99, 33, NULL),
+    (13, 7, 'Frostline Gloves',         'Insulated waterproof gloves.',                   59.99, 50, '/images/frostline-gloves.jpg'),
+    (14, 7, 'Summit Mittens',           'Extra-warm mittens for deep cold.',              64.99, 33, '/images/summit-mittens.jpg'),
     -- Accessories
-    (15, 8, 'Edge Tuning Kit',          'All-in-one wax and edge tuning kit.',            39.99, 45, NULL),
-    (16, 8, 'Padded Board Bag',         'Padded travel bag fits boards up to 165cm.',     89.99, 19, NULL);
+    (15, 8, 'Edge Tuning Kit',          'All-in-one wax and edge tuning kit.',            39.99, 45, '/images/edge-tuning-kit.png'),
+    (16, 8, 'Padded Board Bag',         'Padded travel bag fits boards up to 165cm.',     89.99, 19, '/images/padded-board-bag.png');
 
 -- ----------------------------------------------------------------------------
 -- cart + cart_items

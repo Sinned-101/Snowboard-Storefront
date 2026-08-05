@@ -33,6 +33,9 @@ public class Product {
     // Number of products available
     private int stockQuantity;
 
+    // Image path used to display the product picture
+    private String imageUrl;
+
     // Category name used for display
     private String categoryName;
 
@@ -54,13 +57,14 @@ public class Product {
      * @param categoryName category name used for display
      */
     public Product(int productId, int categoryId, String productName, String description,
-                   BigDecimal price, int stockQuantity, String categoryName) {
+                   BigDecimal price, int stockQuantity,String imageUrl, String categoryName) {
         this.productId = productId;
         this.categoryId = categoryId;
         this.productName = productName;
         this.description = description;
         this.price = price;
         this.stockQuantity = stockQuantity;
+        this.imageUrl = imageUrl;
         this.categoryName = categoryName;
     }
 
@@ -111,6 +115,10 @@ public class Product {
     public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
+
+    public String getImageUrl() { return imageUrl; }
+
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
     public String getCategoryName() {
         return categoryName;
