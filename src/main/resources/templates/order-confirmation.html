@@ -1,13 +1,13 @@
 <!--
     File: order-confirmation.html
-    Description: Order confirmation page for the Black Diamond Gear web application
+    Description: Order confirmation page
     Author: Zach Christianson
     Date Created: July 26, 2026
-    Last Updated: August 2, 2026
+    Last Updated: August 9, 2026
 -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Basic page setup -->
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
     <title>Order Confirmation | Black Diamond Gear</title>
 
     <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
@@ -25,17 +25,19 @@
 
         <!-- Website name and logo -->
         <section class="site-branding">
-            <img src="/images/black-diamond-logo.png" alt="Black Diamond Gear logo" class="site-logo">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
             <h1 class="site-title">Black Diamond Gear</h1>
         </section>
 
         <!-- Main navigation links -->
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/messages">Expert Help</a></li>
-            <li><a href="/customer-dashboard">Dashboard</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/messages}">Expert Help</a></li>
+            <li><a th:href="@{/customer-dashboard}">Dashboard</a></li>
+
+            <!-- Logout hits the /logout route which invalidates the session -->
+            <li><a th:href="@{/logout}">Logout</a></li>
         </ul>
     </nav>
 </header>
@@ -69,8 +71,8 @@
 
             <!-- Confirmation page action links -->
             <section class="form-actions">
-                <a href="/products" class="button">Continue Shopping</a>
-                <a href="/customer-dashboard" class="button secondary">Back to Dashboard</a>
+                <a th:href="@{/products}" class="button">Continue Shopping</a>
+                <a th:href="@{/customer-dashboard}" class="button secondary">Back to Dashboard</a>
             </section>
         </article>
     </section>

@@ -1,9 +1,9 @@
 <!--
     File: products.html
-    Description: Product listing page for the Black Diamond Gear web application
+    Description: Product listing page
     Author: Zach Christianson
     Date Created: June 9, 2026
-    Last Updated: August 2, 2026
+    Last Updated: August 9, 2026
 -->
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
     <title>Products | Black Diamond Gear</title>
 
     <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
@@ -24,22 +24,22 @@
     <nav class="navbar">
         <!-- Website name and logo -->
         <section class="site-branding">
-            <img src="/images/black-diamond-logo.png" alt="Black Diamond Gear logo" class="site-logo">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
             <h1 class="site-title">Black Diamond Gear</h1>
         </section>
 
         <!-- Main navigation links -->
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/messages">Expert Help</a></li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/messages}">Expert Help</a></li>
             <!-- Show Dashboard + Logout if a session exists, otherwise show Login + Register -->
             <li th:if="${session.user_id != null}">
                 <a th:href="${session.role == 'admin'} ? '/admin-dashboard' : (${session.role == 'expert'} ? '/expert-dashboard' : '/customer-dashboard')">Dashboard</a>
             </li>
-            <li th:if="${session.user_id != null}"><a href="/logout">Logout</a></li>
-            <li th:unless="${session.user_id != null}"><a href="/login">Login</a></li>
-            <li th:unless="${session.user_id != null}"><a href="/register">Register</a></li>
+            <li th:if="${session.user_id != null}"><a th:href="@{/logout}">Logout</a></li>
+            <li th:unless="${session.user_id != null}"><a th:href="@{/login}">Login</a></li>
+            <li th:unless="${session.user_id != null}"><a th:href="@{/register}">Register</a></li>
         </ul>
     </nav>
 </header>
@@ -52,7 +52,7 @@
         <h2>Shop Snowboarding and Mountain Gear</h2>
         <p>
             Browse all types of gear, including snowboards, boots,
-            bindings, helmets, goggles, jackets, gloves,and accessories
+            bindings, helmets, goggles, jackets, gloves, and accessories
         </p>
     </section>
 

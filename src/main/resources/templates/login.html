@@ -1,9 +1,9 @@
 <!--
     File: login.html
-    Description: Login page for the Black Diamond Gear web application
+    Description: Login page
     Author: Zach Christianson
     Date Created: June 11, 2026
-    Last Updated: August 2, 2026
+    Last Updated: August 9, 2026
 -->
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
     <title>Login | Black Diamond Gear</title>
 
     <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
@@ -24,22 +24,22 @@
     <nav class="navbar">
         <!-- Website name and logo -->
         <section class="site-branding">
-            <img src="/images/black-diamond-logo.png" alt="Black Diamond Gear logo" class="site-logo">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
             <h1 class="site-title">Black Diamond Gear</h1>
         </section>
 
         <!-- Main navigation links -->
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/messages">Expert Help</a></li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/messages}">Expert Help</a></li>
             <!-- Show Dashboard + Logout if a session exists, otherwise show Login + Register -->
             <li th:if="${session.user_id != null}">
                 <a th:href="${session.role == 'admin'} ? '/admin-dashboard' : (${session.role == 'expert'} ? '/expert-dashboard' : '/customer-dashboard')">Dashboard</a>
             </li>
-            <li th:if="${session.user_id != null}"><a href="/logout">Logout</a></li>
-            <li th:unless="${session.user_id != null}"><a href="/login">Login</a></li>
-            <li th:unless="${session.user_id != null}"><a href="/register">Register</a></li>
+            <li th:if="${session.user_id != null}"><a th:href="@{/logout}">Logout</a></li>
+            <li th:unless="${session.user_id != null}"><a th:href="@{/login}">Login</a></li>
+            <li th:unless="${session.user_id != null}"><a th:href="@{/register}">Register</a></li>
         </ul>
     </nav>
 </header>
@@ -59,7 +59,7 @@
 
     <!-- Login form section -->
     <section class="form-section">
-        <form class="account-form" action="/login" method="post">
+        <form class="account-form" th:action="@{/login}" method="post">
             <h2>Sign In</h2>
 
             <!-- Shows an error message if the login information is incorrect -->
@@ -85,7 +85,7 @@
             <!-- Link to create an account -->
             <p class="form-note">
                 Don't have an account?
-                <a href="/register">Create one here.</a>
+                <a th:href="@{/register}">Create one here.</a>
             </p>
         </form>
     </section>

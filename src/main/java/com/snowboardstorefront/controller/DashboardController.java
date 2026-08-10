@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import com.snowboardstorefront.dao.MessageDAO;
 
 /**
  * Handles dashboard page requests for all three user roles
@@ -25,16 +26,19 @@ public class DashboardController {
 
     private final UserDAO userDAO;
     private final ProfileDAO profileDAO;
+    private final MessageDAO messageDAO;
 
     /**
-     * Initializes the controller with user and profile database operations
+     * Initializes the controller with user, profile, and message database operations
      *
-     * @param userDAO    data access object for the users table
+     * @param userDAO data access object for the users table
      * @param profileDAO data access object for the profile table
+     * @param messageDAO data access object for the conversation and message tables
      */
-    public DashboardController(UserDAO userDAO, ProfileDAO profileDAO) {
+    public DashboardController(UserDAO userDAO, ProfileDAO profileDAO, MessageDAO messageDAO) {
         this.userDAO = userDAO;
         this.profileDAO = profileDAO;
+        this.messageDAO = messageDAO;
     }
 
     // Spring maps GET /customer-dashboard to this method
@@ -118,6 +122,8 @@ public class DashboardController {
         // Put the data into the model so Thymeleaf can display it in the template
         model.addAttribute("profile", profile);
         model.addAttribute("user", user);
+        model.addAttribute("conversationCount", messageDAO.countAllConversations());
+        model.addAttribute("messageCount", messageDAO.countAllMessages());
 
         // Tell Spring to render the admin-dashboard.html template
         return "admin-dashboard";
