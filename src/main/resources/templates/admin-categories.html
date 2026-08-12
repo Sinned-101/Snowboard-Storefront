@@ -3,7 +3,7 @@
     Description: Admin category management page - lists all categories with edit and delete options
     Author: Dennis Feldbruegge
     Date Created: July 18, 2026
-    Last Updated: July 18, 2026
+    Last Updated: August 2, 2026
 -->
 
 <!DOCTYPE html>
@@ -19,7 +19,11 @@
 
 <header>
     <nav class="navbar">
-        <h1 class="site-title">Black Diamond Gear</h1>
+        <!-- Website name and logo -->
+        <section class="site-branding">
+            <img src="/images/black-diamond-logo.png" alt="Black Diamond Gear logo" class="site-logo">
+            <h1 class="site-title">Black Diamond Gear</h1>
+        </section>
         <ul class="nav-links">
             <li><a th:href="@{/}">Home</a></li>
             <li><a th:href="@{/products}">Products</a></li>
@@ -75,6 +79,8 @@
 
         </div>
     </section>
+
+</main>
 
 <footer>
     <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>

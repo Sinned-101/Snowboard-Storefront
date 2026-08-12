@@ -32,6 +32,20 @@ body {
     text-transform: uppercase;
 }
 
+.site-branding {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.site-logo {
+    width: 125px;
+    height: 125px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
 /* Displays the navigation menu as a horizontal row */
 .nav-links {
     list-style: none;
@@ -84,6 +98,30 @@ body {
 /* Home page action links */
 .hero-buttons {
     margin-top: 25px;
+}
+
+/* Hero section layout with images on both sides of the text */
+.hero-with-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 130px;
+    flex-wrap: nowrap;
+}
+
+/* Centers and limits the width of the main hero text */
+.hero-content {
+    max-width: 500px;
+    text-align: center;
+}
+
+/* Images on the left and right sides of the hero section */
+.hero-side-image {
+    width: 360px;
+    height: 280px;
+    object-fit: cover;
+    border: 2px solid #020202;
+    border-radius: 12px;
 }
 
 /* Page heading section */
@@ -570,6 +608,18 @@ footer {
     background-color: #fff;
 }
 
+/* Styling for images */
+.product-detail-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+    border: #020202 solid 2px;
+    margin: 20px auto;
+    display: block;
+}
+
 /* Adjusts layout for tablets and smaller screens */
 @media screen and (max-width: 768px) {
     .navbar {
@@ -645,11 +695,6 @@ footer {
         text-align: center;
     }
 
-    .product-actions .button {
-        text-align: center;
-        width: fit-content;
-    }
-
     .account-form {
         padding: 25px;
         box-sizing: border-box;
@@ -670,5 +715,18 @@ footer {
     .message-card,
     .message-form {
         box-sizing: border-box;
+    }
+
+    /* Stacks the hero images and text vertically on phone-sized screens */
+    .hero-with-images {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    /* Resizes the hero images so they fit better on small screens */
+    .hero-side-image {
+        width: 90%;
+        max-width: 340px;
+        height: 220px;
     }
 }

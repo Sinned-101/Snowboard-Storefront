@@ -45,6 +45,7 @@ public class ProductDAO {
                     p.description,
                     p.price,
                     p.stock_quantity,
+                    p.image_url,
                     c.name AS category_name
                 FROM product p
                 JOIN category c ON p.category_id = c.category_id
@@ -58,6 +59,7 @@ public class ProductDAO {
                 resultSet.getString("description"),
                 resultSet.getBigDecimal("price"),
                 resultSet.getInt("stock_quantity"),
+                resultSet.getString("image_url"),
                 resultSet.getString("category_name")
         ));
     }
@@ -77,6 +79,7 @@ public class ProductDAO {
                 p.description,
                 p.price,
                 p.stock_quantity,
+                p.image_url,
                 c.name AS category_name
             FROM product p
             JOIN category c ON p.category_id = c.category_id
@@ -91,6 +94,7 @@ public class ProductDAO {
                 resultSet.getString("description"),
                 resultSet.getBigDecimal("price"),
                 resultSet.getInt("stock_quantity"),
+                resultSet.getString("image_url"),
                 resultSet.getString("category_name")
         ), categoryName);
     }
@@ -110,6 +114,7 @@ public class ProductDAO {
                     p.description,
                     p.price,
                     p.stock_quantity,
+                    p.image_url,
                     c.name AS category_name
                 FROM product p
                 JOIN category c ON p.category_id = c.category_id
@@ -126,6 +131,7 @@ public class ProductDAO {
                             resultSet.getString("description"),
                             resultSet.getBigDecimal("price"),
                             resultSet.getInt("stock_quantity"),
+                            resultSet.getString("image_url"),
                             resultSet.getString("category_name")
                     ),
                     productId

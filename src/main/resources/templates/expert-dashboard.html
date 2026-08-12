@@ -3,7 +3,7 @@
     Description: Expert dashboard Thymeleaf template
     Author: Dennis Feldbruegge
     Date Created: July 18, 2026
-    Last Updated: July 18, 2026
+    Last Updated: August 2, 2026
 -->
 
 <!DOCTYPE html>
@@ -22,7 +22,11 @@
 <!-- Header section -->
 <header>
     <nav class="navbar">
-        <h1 class="site-title">Black Diamond Gear</h1>
+        <!-- Website name and logo -->
+        <section class="site-branding">
+            <img src="/images/black-diamond-logo.png" alt="Black Diamond Gear logo" class="site-logo">
+            <h1 class="site-title">Black Diamond Gear</h1>
+        </section>
 
         <!-- Nav links use Spring Boot routes, not .html file paths -->
         <ul class="nav-links">

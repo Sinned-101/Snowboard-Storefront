@@ -3,7 +3,7 @@
     Description: Home page for the Black Diamond Gear web application
     Author: Zach Christianson
     Date Created: June 9, 2026
-    Last Updated: July 14, 2026
+    Last Updated: August 2, 2026
 -->
 
 <!DOCTYPE html>
@@ -21,8 +21,11 @@
 <!-- Header section -->
 <header>
     <nav class="navbar">
-        <!-- Website name/title -->
-        <h1 class="site-title">Black Diamond Gear</h1>
+        <!-- Website name and logo -->
+        <section class="site-branding">
+            <img src="/images/black-diamond-logo.png" alt="Black Diamond Gear logo" class="site-logo">
+            <h1 class="site-title">Black Diamond Gear</h1>
+        </section>
 
         <!-- Main navigation links -->
         <ul class="nav-links">
@@ -45,19 +48,34 @@
 <main>
 
     <!-- Hero section -->
-    <section class="hero">
-        <h2>Find the All the Gear You Need to Shred the Mountain!</h2>
+    <section class="hero hero-with-images">
 
-        <p>
-            Shop snowboards, boots, bindings, helmets, goggles, clothing,
-            and other gear for every skill level and riding style
-        </p>
+        <!-- Left hero image -->
+        <img src="/images/homepage1.jpg"
+             alt="Snowboarder riding on snow"
+             class="hero-side-image">
 
-        <!-- Links that direct users to pages for shopping gear or asking an expert for help -->
-        <p class="hero-buttons">
-            <a href="products.html" class="button">Shop Gear</a>
-            <a href="messages.html" class="button secondary">Ask an Expert</a>
-        </p>
+        <!-- Hero text and action buttons -->
+        <section class="hero-content">
+            <h2>Find All the Gear You Need to Shred the Mountain!</h2>
+
+            <p>
+                Shop snowboards, boots, bindings, helmets, goggles, clothing,
+                and other gear for every skill level and riding style.
+            </p>
+
+            <!-- Links that direct users to pages for shopping gear or asking an expert for help -->
+            <p class="hero-buttons">
+                <a href="/products" class="button">Shop Gear</a>
+                <a href="/messages" class="button secondary">Ask an Expert</a>
+            </p>
+        </section>
+
+        <!-- Right hero image -->
+        <img src="/images/homepage2.jpg"
+             alt="Snowboard and mountain gear"
+             class="hero-side-image">
+
     </section>
 
     <!-- Category section that shows the main types of products -->
