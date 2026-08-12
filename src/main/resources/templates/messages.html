@@ -1,0 +1,145 @@
+<!--
+    File: messages.html
+    Description: Internal messaging page for customers and gear experts
+    Author: Zach Christianson
+    Date Created: June 14, 2026
+    Last Updated: August 9, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Help | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name and logo -->
+        <section class="site-branding">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
+            <h1 class="site-title">Black Diamond Gear</h1>
+        </section>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/messages}">Expert Help</a></li>
+            <li><a th:href="@{/cart}">Cart</a></li>
+
+            <!-- Show Dashboard + Logout if a session exists, otherwise show Login + Register -->
+            <li th:if="${session.user_id != null}">
+                <a th:href="${session.role == 'admin'} ? '/admin-dashboard' : (${session.role == 'expert'} ? '/expert-dashboard' : '/customer-dashboard')">Dashboard</a>
+            </li>
+            <li th:if="${session.user_id != null}"><a th:href="@{/logout}">Logout</a></li>
+            <li th:unless="${session.user_id != null}"><a th:href="@{/login}">Login</a></li>
+            <li th:unless="${session.user_id != null}"><a th:href="@{/register}">Register</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Messages</h2>
+
+        <p>
+            View your conversations or send a new message to a gear expert
+        </p>
+    </section>
+
+    <!-- Messaging area for customer questions and expert responses -->
+    <section class="message-section">
+
+        <!-- Shows a message if there are no conversations -->
+        <article class="message-card" th:if="${conversations.isEmpty()}">
+            <h3>No Conversations</h3>
+
+            <p>
+                You do not have any messages yet.
+            </p>
+        </article>
+
+        <!-- Displays conversations from the database -->
+        <article class="message-card" th:each="conversation : ${conversations}">
+            <h3 th:text="${conversation.subject}">Conversation Subject</h3>
+
+            <p>
+                <strong>Conversation ID:</strong>
+                <span th:text="${conversation.conversationId}">0</span>
+            </p>
+
+            <p>
+                <strong>Customer ID:</strong>
+                <span th:text="${conversation.customerId}">0</span>
+            </p>
+
+            <p>
+                <strong>Expert ID:</strong>
+                <span th:text="${conversation.expertId}">0</span>
+            </p>
+
+            <p>
+                <strong>Last Updated:</strong>
+                <span th:text="${#dates.format(conversation.updatedAt, 'MMM dd, yyyy h:mm a')}">Date</span>
+            </p>
+
+            <!-- Opens the selected conversation -->
+            <p class="form-actions">
+                <a th:href="@{/messages/{id}(id=${conversation.conversationId})}" class="button">
+                    View Conversation
+                </a>
+            </p>
+        </article>
+
+        <!-- Form for starting a new conversation -->
+        <form class="message-form" th:action="@{/messages/start}" method="post">
+            <h3>Send a Message</h3>
+
+            <!-- Subject field for the new conversation -->
+            <p>
+                <label for="subject">Subject</label>
+                <input type="text"
+                       id="subject"
+                       name="subject"
+                       placeholder="Example: Which board size should I choose?"
+                       required>
+            </p>
+
+            <!-- Message text area -->
+            <p>
+                <label for="body">Message</label>
+                <textarea id="body"
+                          name="body"
+                          rows="6"
+                          placeholder="Type your message to a gear expert"
+                          required></textarea>
+            </p>
+
+            <!-- Submit button -->
+            <p class="form-actions">
+                <button type="submit" class="button">Send Message</button>
+            </p>
+        </form>
+
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

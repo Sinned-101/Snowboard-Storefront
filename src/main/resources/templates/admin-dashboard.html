@@ -3,7 +3,7 @@
     Description: Admin dashboard Thymeleaf template
     Author: Dennis Feldbruegge
     Date Created: July 18, 2026
-    Last Updated: August 2, 2026
+    Last Updated: August 9, 2026
 -->
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
     <nav class="navbar">
         <!-- Website name and logo -->
         <section class="site-branding">
-            <img src="/images/black-diamond-logo.png" alt="Black Diamond Gear logo" class="site-logo">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
             <h1 class="site-title">Black Diamond Gear</h1>
         </section>
 
@@ -104,11 +104,19 @@
             <a th:href="@{/orders}" class="button">View Orders</a>
         </article>
 
-        <!-- Message summary - will be wired to real data in the messaging milestone -->
+        <!-- Message summary card -->
         <article class="dashboard-card">
             <h3>Message Summary</h3>
-            <p>Conversation and message counts will appear here once messaging is built.</p>
-            <a th:href="@{/messages}" class="button">View Messages</a>
+
+            <p>
+                <strong>Total Conversations:</strong>
+                <span th:text="${conversationCount}">0</span>
+            </p>
+
+            <p>
+                <strong>Total Messages:</strong>
+                <span th:text="${messageCount}">0</span>
+            </p>
         </article>
 
     </section>

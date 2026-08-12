@@ -3,7 +3,7 @@
     Description: Customer dashboard Thymeleaf template
     Author: Dennis Feldbruegge
     Date Created: July 18, 2026
-    Last Updated: August 2, 2026
+    Last Updated: August 9, 2026
 -->
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
     <nav class="navbar">
         <!-- Website name and logo -->
         <section class="site-branding">
-            <img src="/images/black-diamond-logo.png" alt="Black Diamond Gear logo" class="site-logo">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
             <h1 class="site-title">Black Diamond Gear</h1>
         </section>
 
@@ -71,10 +71,10 @@
             <a th:href="@{/profile}" class="button">Edit Profile</a>
         </article>
 
-        <!-- Cart summary - will be wired to real data in the cart milestone -->
+        <!-- Cart summary -->
         <article class="dashboard-card">
             <h3>Shopping Cart</h3>
-            <p>Your cart details will appear here once the cart feature is built.</p>
+            <p>View the gear you have added to your cart and continue to checkout.</p>
             <a th:href="@{/cart}" class="button">View Cart</a>
         </article>
 
@@ -85,10 +85,10 @@
             <a th:href="@{/orders}" class="button">View Orders</a>
         </article>
 
-        <!-- Messages summary - will be wired to real data in the messaging milestone -->
+        <!-- Messages summary -->
         <article class="dashboard-card">
             <h3>Messages</h3>
-            <p>Your conversations with gear experts will appear here once messaging is built.</p>
+            <p>View your conversations with gear experts or send a new message for help choosing gear.</p>
             <a th:href="@{/messages}" class="button">View Messages</a>
         </article>
 

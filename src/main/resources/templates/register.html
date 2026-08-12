@@ -1,13 +1,13 @@
 <!--
     File: register.html
-    Description: Registration page for the Black Diamond Gear web application
+    Description: Registration page
     Author: Zach Christianson
     Date Created: June 11, 2026
-    Last Updated: August 2, 2026
+    Last Updated: August 9, 2026
 -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Basic page setup -->
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
     <title>Register | Black Diamond Gear</title>
 
     <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
@@ -24,17 +24,17 @@
     <nav class="navbar">
         <!-- Website name and logo -->
         <section class="site-branding">
-            <img src="/images/black-diamond-logo.png" alt="Black Diamond Gear logo" class="site-logo">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
             <h1 class="site-title">Black Diamond Gear</h1>
         </section>
 
         <!-- Main navigation links -->
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/messages">Expert Help</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register</a></li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/messages}">Expert Help</a></li>
+            <li><a th:href="@{/login}">Login</a></li>
+            <li><a th:href="@{/register}">Register</a></li>
         </ul>
     </nav>
 </header>
@@ -54,7 +54,7 @@
 
     <!-- Registration form section -->
     <section class="form-section">
-        <form class="account-form" action="/register" method="post">
+        <form class="account-form" th:action="@{/register}" method="post">
             <h2>Create Account</h2>
 
             <!-- Shows an error message if registration cannot be completed -->
@@ -150,7 +150,7 @@
             <!-- Link for users who already have an account -->
             <p class="form-note">
                 Already have an account?
-                <a href="/login">Sign in here.</a>
+                <a th:href="@{/login}">Sign in here.</a>
             </p>
         </form>
     </section>

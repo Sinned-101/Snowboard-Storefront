@@ -3,7 +3,7 @@
     Description: Home page for the Black Diamond Gear web application
     Author: Zach Christianson
     Date Created: June 9, 2026
-    Last Updated: August 2, 2026
+    Last Updated: August 9, 2026
 -->
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
     <title>Black Diamond Gear</title>
 
     <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
@@ -23,23 +23,23 @@
     <nav class="navbar">
         <!-- Website name and logo -->
         <section class="site-branding">
-            <img src="/images/black-diamond-logo.png" alt="Black Diamond Gear logo" class="site-logo">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
             <h1 class="site-title">Black Diamond Gear</h1>
         </section>
 
         <!-- Main navigation links -->
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/messages">Expert Help</a></li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/messages}">Expert Help</a></li>
 
             <!-- Show Dashboard + Logout if a session exists, otherwise show Login + Register -->
             <li th:if="${session.user_id != null}">
                 <a th:href="${session.role == 'admin'} ? '/admin-dashboard' : (${session.role == 'expert'} ? '/expert-dashboard' : '/customer-dashboard')">Dashboard</a>
             </li>
-            <li th:if="${session.user_id != null}"><a href="/logout">Logout</a></li>
-            <li th:unless="${session.user_id != null}"><a href="/login">Login</a></li>
-            <li th:unless="${session.user_id != null}"><a href="/register">Register</a></li>
+            <li th:if="${session.user_id != null}"><a th:href="@{/logout}">Logout</a></li>
+            <li th:unless="${session.user_id != null}"><a th:href="@{/login}">Login</a></li>
+            <li th:unless="${session.user_id != null}"><a th:href="@{/register}">Register</a></li>
         </ul>
     </nav>
 </header>
@@ -51,7 +51,7 @@
     <section class="hero hero-with-images">
 
         <!-- Left hero image -->
-        <img src="/images/homepage1.jpg"
+        <img th:src="@{/images/homepage1.jpg}"
              alt="Snowboarder riding on snow"
              class="hero-side-image">
 
@@ -61,18 +61,18 @@
 
             <p>
                 Shop snowboards, boots, bindings, helmets, goggles, clothing,
-                and other gear for every skill level and riding style.
+                and other gear for every skill level and riding style
             </p>
 
             <!-- Links that direct users to pages for shopping gear or asking an expert for help -->
             <p class="hero-buttons">
-                <a href="/products" class="button">Shop Gear</a>
-                <a href="/messages" class="button secondary">Ask an Expert</a>
+                <a th:href="@{/products}" class="button">Shop Gear</a>
+                <a th:href="@{/messages}" class="button secondary">Ask an Expert</a>
             </p>
         </section>
 
         <!-- Right hero image -->
-        <img src="/images/homepage2.jpg"
+        <img th:src="@{/images/homepage2.jpg}"
              alt="Snowboard and mountain gear"
              class="hero-side-image">
 
@@ -85,35 +85,35 @@
         <!-- Product category list -->
         <ul class="category-grid">
             <li class="category-card">
-                <a href="/products?category=Snowboards">Snowboards</a>
+                <a th:href="@{/products(category='Snowboards')}">Snowboards</a>
             </li>
 
             <li class="category-card">
-                <a href="/products?category=Boots">Boots</a>
+                <a th:href="@{/products(category='Boots')}">Boots</a>
             </li>
 
             <li class="category-card">
-                <a href="/products?category=Bindings">Bindings</a>
+                <a th:href="@{/products(category='Bindings')}">Bindings</a>
             </li>
 
             <li class="category-card">
-                <a href="/products?category=Helmets">Helmets</a>
+                <a th:href="@{/products(category='Helmets')}">Helmets</a>
             </li>
 
             <li class="category-card">
-                <a href="/products?category=Goggles">Goggles</a>
+                <a th:href="@{/products(category='Goggles')}">Goggles</a>
             </li>
 
             <li class="category-card">
-                <a href="/products?category=Jackets">Jackets</a>
+                <a th:href="@{/products(category='Jackets')}">Jackets</a>
             </li>
 
             <li class="category-card">
-                <a href="/products?category=Gloves">Gloves</a>
+                <a th:href="@{/products(category='Gloves')}">Gloves</a>
             </li>
 
             <li class="category-card">
-                <a href="/products?category=Accessories">Accessories</a>
+                <a th:href="@{/products(category='Accessories')}">Accessories</a>
             </li>
         </ul>
     </section>
@@ -130,7 +130,7 @@
 
         <!-- Link to the messaging feature -->
         <p>
-            <a href="messages.html" class="button">Message an Expert</a>
+            <a th:href="@{/messages}" class="button">Message an Expert</a>
         </p>
     </section>
 
@@ -145,21 +145,21 @@
             <article class="product-card">
                 <h3>Summit All-Mountain 156</h3>
                 <p class="product-price">$449.99</p>
-                <a href="/products/1" class="button">View Details</a>
+                <a th:href="@{/products/1}" class="button">View Details</a>
             </article>
 
             <!-- Featured goggles product -->
             <article class="product-card">
                 <h3>Vista Wide Goggles</h3>
                 <p class="product-price">$89.99</p>
-                <a href="/products/9" class="button">View Details</a>
+                <a th:href="@{/products/9}" class="button">View Details</a>
             </article>
 
             <!-- Featured gloves product -->
             <article class="product-card">
                 <h3>Frostline Gloves</h3>
                 <p class="product-price">$59.99</p>
-                <a href="/products/13" class="button">View Details</a>
+                <a th:href="@{/products/13}" class="button">View Details</a>
             </article>
         </section>
     </section>

@@ -1,0 +1,138 @@
+<!--
+    File: conversation-details.html
+    Description: Conversation details page for viewing messages
+    Author: Zach Christianson
+    Date Created: August 9, 2026
+    Last Updated: August 9, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Details | Black Diamond Gear</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+    <nav class="navbar">
+        <!-- Website name and logo -->
+        <section class="site-branding">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
+            <h1 class="site-title">Black Diamond Gear</h1>
+        </section>
+
+        <!-- Main navigation links -->
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/messages}">Expert Help</a></li>
+            <li><a th:href="@{/cart}">Cart</a></li>
+
+            <!-- Show Dashboard + Logout if a session exists, otherwise show Login + Register -->
+            <li th:if="${session.user_id != null}">
+                <a th:href="${session.role == 'admin'} ? '/admin-dashboard' : (${session.role == 'expert'} ? '/expert-dashboard' : '/customer-dashboard')">
+                    Dashboard
+                </a>
+            </li>
+
+            <li th:if="${session.user_id != null}">
+                <a th:href="@{/logout}">Logout</a>
+            </li>
+
+            <li th:unless="${session.user_id != null}">
+                <a th:href="@{/login}">Login</a>
+            </li>
+
+            <li th:unless="${session.user_id != null}">
+                <a th:href="@{/register}">Register</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main content -->
+<main>
+
+    <!-- Page introduction -->
+    <section class="page-heading">
+        <h2>Conversation Details</h2>
+
+        <p>
+            View the messages for this conversation.
+        </p>
+    </section>
+
+    <!-- Conversation message area -->
+    <section class="message-section">
+
+        <!-- Shows a message if the conversation has no messages -->
+        <article class="message-card" th:if="${messages.isEmpty()}">
+            <h3>No Messages</h3>
+
+            <p>
+                This conversation does not have any messages yet.
+            </p>
+        </article>
+
+        <!-- Displays messages from the selected conversation -->
+        <article class="message-card" th:each="message : ${messages}">
+            <p>
+                <strong th:text="${message.senderId == currentUserId ? 'You' : (session.role == 'customer' ? 'Gear Expert' : 'Customer')}">Sender</strong>
+            </p>
+
+            <p th:text="${message.body}">
+                Message body
+            </p>
+
+            <p>
+                <strong>Sent:</strong>
+                <span th:text="${#dates.format(message.sentAt, 'MMM dd, yyyy h:mm a')}">Date</span>
+            </p>
+        </article>
+
+        <!-- Form for replying to the selected conversation -->
+        <form class="message-form" th:action="@{/messages/reply}" method="post">
+            <h3>Send a Reply</h3>
+
+            <!-- Sends the selected conversation ID with the reply -->
+            <input type="hidden" name="conversationId" th:value="${conversationId}">
+
+            <!-- Reply message text area -->
+            <p>
+                <label for="body">Reply</label>
+                <textarea id="body"
+                          name="body"
+                          rows="6"
+                          placeholder="Type your reply"
+                          required></textarea>
+            </p>
+
+            <!-- Submit button -->
+            <p class="form-actions">
+                <button type="submit" class="button">Send Reply</button>
+            </p>
+        </form>
+
+        <!-- Link back to the messages page -->
+        <p class="form-actions">
+            <a th:href="@{/messages}" class="button secondary">Back to Messages</a>
+        </p>
+
+    </section>
+
+</main>
+
+<!-- Footer section -->
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

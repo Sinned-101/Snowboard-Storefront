@@ -173,4 +173,26 @@ public class UserDAO {
 
         jdbcTemplate.update(sql, role, userId);
     }
+
+    /**
+     * Finds the first expert user ID for assigning new customer conversations
+     *
+     * @return expert user ID, or 0 if no expert is found
+     */
+    public int findFirstExpertId() {
+        String sql = """
+            SELECT user_id
+            FROM users
+            WHERE role = 'expert'
+            ORDER BY user_id
+            LIMIT 1
+            """;
+
+        try {
+            Integer expertId = jdbcTemplate.queryForObject(sql, Integer.class);
+            return expertId == null ? 0 : expertId;
+        } catch (Exception exception) {
+            return 0;
+        }
+    }
 }
