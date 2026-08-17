@@ -1,0 +1,90 @@
+<!--
+    File: orders-completed.html
+    Description: Customer completed orders page - read-only view of shipped, delivered, and in-store orders
+    Author: Dennis Feldbruegge
+    Date Created: August 16, 2026
+    Last Updated: August 16, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Orders | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <section class="site-branding">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
+            <h1 class="site-title">Black Diamond Gear</h1>
+        </section>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/customer-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Completed Orders</h2>
+        <p>Your shipped, delivered, and in-store orders. These cannot be edited.</p>
+    </section>
+
+    <section class="admin-section">
+        <div class="admin-section-inner">
+
+            <!-- Link back to active orders -->
+            <div class="form-actions">
+                <a th:href="@{/orders}" class="button secondary">View Active Orders</a>
+            </div>
+
+            <!-- Message shown when there are no completed orders -->
+            <p th:if="${orders.isEmpty()}" style="color:#f4f4f4; text-align:center; margin-top:2rem;">
+                You have no completed orders yet.
+            </p>
+
+            <!-- Read-only table of completed orders -->
+            <table class="admin-table" th:unless="${orders.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th>Order #</th>
+                        <th>Date</th>
+                        <th>Channel</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Tracking #</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.orderId}">0</td>
+                        <td th:text="${order.orderDate}">Date</td>
+                        <!-- channel.displayName returns "Delivery" or "In Store" -->
+                        <td th:text="${order.channel.displayName}">Channel</td>
+                        <td th:text="${'$' + order.totalAmount}">$0.00</td>
+                        <td th:text="${order.status}">status</td>
+                        <!-- Tracking number only exists for delivery orders that have shipped -->
+                        <td th:text="${order.channel.channelType == 'delivery' ? order.channel.trackingNumber : 'N/A'}">—</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

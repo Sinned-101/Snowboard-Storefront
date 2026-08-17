@@ -1,0 +1,110 @@
+<!--
+    File: order-edit.html
+    Description: Edit page for active pending delivery orders - update address or item quantities
+    Author: Dennis Feldbruegge
+    Date Created: August 16, 2026
+    Last Updated: August 16, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Order | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <section class="site-branding">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
+            <h1 class="site-title">Black Diamond Gear</h1>
+        </section>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/customer-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Edit Order <span th:text="${'#' + order.orderId}"></span></h2>
+        <p>You can update your shipping address or change item quantities. Changes are not allowed once the order ships.</p>
+    </section>
+
+    <section class="form-section">
+        <div style="max-width: 90%; margin: 0 auto;">
+
+            <!-- Shipping address edit form -->
+            <div class="account-form-wide" style="margin-bottom: 2rem;">
+                <h2>Shipping Address</h2>
+
+                <!-- Form submits to POST /orders/{orderId}/edit/address -->
+                <form th:action="@{/orders/{id}/edit/address(id=${order.orderId})}" method="post">
+                    <p>
+                        <label for="shipping_address">Delivery Address</label>
+                        <!-- th:value pre-fills with the current shipping address -->
+                        <input type="text" id="shipping_address" name="shipping_address"
+                               th:value="${order.channel.deliveryAddress}" required>
+                    </p>
+                    <p class="form-actions">
+                        <button type="submit" class="button">Update Address</button>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Order items table with quantity edit forms per row -->
+            <div class="account-form-wide">
+                <h2>Order Items</h2>
+
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Line Total</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- th:each creates one row per order item -->
+                        <tr th:each="item : ${orderItems}">
+                            <td th:text="${item.productName}">Product</td>
+                            <td th:text="${'$' + item.priceAtOrder}">$0.00</td>
+                            <td th:text="${item.quantity}">1</td>
+                            <td th:text="${'$' + item.lineTotal}">$0.00</td>
+                            <td>
+                                <!-- Each row has its own quantity update form -->
+                                <form th:action="@{/orders/{id}/edit/quantity(id=${order.orderId})}" method="post" style="display:inline-flex; gap:0.5rem; align-items:center;">
+                                    <input type="hidden" name="orderItemId" th:value="${item.orderItemId}">
+                                    <input type="number" name="quantity" th:value="${item.quantity}" min="0" style="width:4rem; padding:0.4rem; border-radius:0.3rem; border:1px solid #999;">
+                                    <button type="submit" class="button">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="form-actions" style="margin-top:1.5rem;">
+                    <a th:href="@{/orders}" class="button secondary">Back to Active Orders</a>
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

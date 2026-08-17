@@ -8,6 +8,7 @@
 
 package com.snowboardstorefront.controller;
 
+import com.snowboardstorefront.dao.OrderDAO;
 import com.snowboardstorefront.dao.ProfileDAO;
 import com.snowboardstorefront.model.Profile;
 import jakarta.servlet.http.HttpSession;
@@ -24,10 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProfileController {
 
     private final ProfileDAO profileDAO;
+    private final OrderDAO orderDAO;
 
-    // Spring injects the ProfileDAO through the constructor
-    public ProfileController(ProfileDAO profileDAO) {
+    // Spring injects the ProfileDAO and OrderDAO through the constructor
+    public ProfileController(ProfileDAO profileDAO, OrderDAO orderDAO) {
         this.profileDAO = profileDAO;
+        this.orderDAO = orderDAO;
     }
 
     // Shows the edit profile page pre-filled with the user's current profile data
@@ -40,9 +43,15 @@ public class ProfileController {
             return "redirect:/login";
         }
 
-        // Fetch the logged-in user's profile and pass it to the template
+        // Fetch the logged-in user's profile and active orders for the profile page
         Profile profile = profileDAO.findByUserId(userId);
         model.addAttribute("profile", profile);
+
+        // Only customers have orders - pass active orders if the user is a customer
+        String role = (String) session.getAttribute("role");
+        if ("customer".equals(role)) {
+            model.addAttribute("activeOrders", orderDAO.findActiveOrdersByUserId(userId));
+        }
 
         return "profile";
     }

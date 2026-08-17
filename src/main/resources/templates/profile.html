@@ -101,6 +101,56 @@
 
     </section>
 
+    <!-- Active orders section - shows pending delivery orders inline on the profile page -->
+    <section class="admin-section" th:if="${activeOrders != null and !activeOrders.isEmpty()}">
+        <div class="admin-section-inner">
+
+            <h2 style="color:#20e878; margin-bottom:1rem;">Active Orders</h2>
+            <p style="color:#d8d8d8; margin-bottom:1.5rem;">
+                Delivery orders that have not yet shipped.
+                <a th:href="@{/orders}" style="color:#20e878;">Manage all active orders</a>
+                &nbsp;|&nbsp;
+                <a th:href="@{/orders/completed}" style="color:#20e878;">View completed orders</a>
+            </p>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Order #</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order : ${activeOrders}">
+                        <td th:text="${order.orderId}">0</td>
+                        <td th:text="${order.orderDate}">Date</td>
+                        <td th:text="${'$' + order.totalAmount}">$0.00</td>
+                        <td th:text="${order.status}">pending</td>
+                        <td>
+                            <a th:href="@{/orders/{id}/edit(id=${order.orderId})}" class="button">Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+
+    <!-- Shown when the customer has no active orders -->
+    <section class="admin-section" th:if="${activeOrders != null and activeOrders.isEmpty()}">
+        <div class="admin-section-inner">
+            <p style="color:#d8d8d8; text-align:center;">
+                No active orders.
+                <a th:href="@{/products}" style="color:#20e878;">Shop now</a>
+                &nbsp;|&nbsp;
+                <a th:href="@{/orders/completed}" style="color:#20e878;">View completed orders</a>
+            </p>
+        </div>
+    </section>
+
 </main>
 
 <footer>

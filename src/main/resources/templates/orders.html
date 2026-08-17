@@ -1,0 +1,93 @@
+<!--
+    File: orders.html
+    Description: Customer active orders page - shows pending delivery orders with edit links
+    Author: Dennis Feldbruegge
+    Date Created: August 16, 2026
+    Last Updated: August 16, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Orders | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <section class="site-branding">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
+            <h1 class="site-title">Black Diamond Gear</h1>
+        </section>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/customer-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Active Orders</h2>
+        <p>Delivery orders that have not yet shipped. You can edit these until they are marked as shipped.</p>
+    </section>
+
+    <section class="admin-section">
+        <div class="admin-section-inner">
+
+            <!-- Link to completed orders -->
+            <div class="form-actions">
+                <a th:href="@{/orders/completed}" class="button secondary">View Completed Orders</a>
+            </div>
+
+            <!-- Message shown when there are no active orders -->
+            <p th:if="${orders.isEmpty()}" style="color:#f4f4f4; text-align:center; margin-top:2rem;">
+                You have no active orders. <a th:href="@{/products}" style="color:#20e878;">Browse products</a> to place one.
+            </p>
+
+            <!-- Table of active orders -->
+            <table class="admin-table" th:unless="${orders.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th>Order #</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Shipping Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- th:each loops over the orders list and creates one row per order -->
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.orderId}">0</td>
+                        <td th:text="${order.orderDate}">Date</td>
+                        <td th:text="${'$' + order.totalAmount}">$0.00</td>
+                        <td th:text="${order.status}">pending</td>
+                        <!-- Cast to DeliveryChannel to access the shipping address -->
+                        <td th:text="${order.channel.deliveryAddress}">Address</td>
+                        <td>
+                            <!-- Edit link is only shown for editable orders -->
+                            <a th:href="@{/orders/{id}/edit(id=${order.orderId})}" class="button">Edit Order</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
