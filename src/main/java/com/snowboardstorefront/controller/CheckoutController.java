@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.snowboardstorefront.dao.ProfileDAO;
 
 /**
@@ -48,6 +49,11 @@ public class CheckoutController {
             return "redirect:/login";
         }
 
+        // Admins should use the admin order creation page instead of the customer checkout
+        if ("admin".equals(session.getAttribute("role"))) {
+            return "redirect:/admin/orders/create";
+        }
+
         int userId = (int) userIdObject;
 
         model.addAttribute("profile", profileDAO.findByUserId(userId));
@@ -60,28 +66,41 @@ public class CheckoutController {
     /**
      * Places an order using the logged-in user's cart
      *
+     * @param channel delivery or in_store selected by the customer
+     * @param shippingAddress the address for delivery orders - null for in-store
      * @param session current user session
      * @param model model used to send confirmation information to the page
      * @return order confirmation page or redirect to cart
      */
     @PostMapping("/checkout/place-order")
-    public String placeOrder(HttpSession session, Model model) {
+    public String placeOrder(
+            @RequestParam(defaultValue = "delivery") String channel,
+            @RequestParam(required = false, name = "shipping_address") String shippingAddress,
+            HttpSession session,
+            Model model) {
+
         Object userIdObject = session.getAttribute("user_id");
 
         if (userIdObject == null) {
             return "redirect:/login";
         }
 
+        // Admins should use the admin order creation page
+        if ("admin".equals(session.getAttribute("role"))) {
+            return "redirect:/admin/orders/create";
+        }
+
         int userId = (int) userIdObject;
 
-        // Creates the order from the user's current cart
-        int orderId = orderDAO.placeOrder(userId);
+        // Creates the order with the selected channel and optional shipping address
+        int orderId = orderDAO.placeOrder(userId, channel, shippingAddress);
 
         if (orderId == 0) {
             return "redirect:/cart";
         }
 
         model.addAttribute("orderId", orderId);
+        model.addAttribute("channel", channel);
 
         return "order-confirmation";
     }
