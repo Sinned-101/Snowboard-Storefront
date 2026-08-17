@@ -36,7 +36,7 @@ Each role lands on a dashboard built for them.
 
 ## Frontend Pages
 
-The initial frontend webpage templates were created with HTML and CSS, and several pages have now been connected to the Spring Boot backend using Thymeleaf. Product pages, cart pages, checkout, dashboard navigation, profile pages, and admin management pages use Spring Boot routes instead of opening static HTML files directly. 
+The initial frontend webpage templates were created with HTML and CSS, and all main pages have now been connected to the Spring Boot backend using Thymeleaf. The application uses Spring Boot routes instead of opening static HTML files directly. The storefront also includes a site logo, homepage images, and product images displayed through Thymeleaf templates and database image paths.
 
 Added pages include:
 
@@ -55,11 +55,18 @@ Added pages include:
 * Order confirmation page
 * Orders page
 * Messages page
+* Conversation details page
 * Admin product management pages
 * Admin category management pages
 * Admin user management pages
 
 The product names, categories, prices, cart items, orders, user profiles, and message examples shown on the pages are based on the sample records in `database/seed.sql`.
+
+## Images and Styling
+
+The storefront includes a custom site logo, homepage images, and product images for selected catalog items. Static images are stored in: `src/main/resources/static/images`.
+
+Product images are displayed on product detail pages using image paths from the database, while homepage and logo images are loaded through Thymeleaf routes.
 
 ## Spring Boot Backend
 
@@ -94,10 +101,19 @@ Current backend features include:
 * Shipping information displayed from the profile table
 * Order placement using the orders and order_items tables
 * Cart clearing after checkout
-* Order confirmation page after a successful purchase 
+* Order confirmation page after a successful purchase
+* Product image support on product detail pages
+* Homepage logo and hero images
+* Messages page connected to the conversation table
+* Conversation details page connected to the message table
+* Customer message creation
+* Customer and expert replies
+* Automatic assignment of new customer messages to an expert account
+* Existing customer/expert conversations reused to avoid duplicate conversation records
+* Access checks so users can only view and reply to conversations they belong to
+* Admin dashboard conversation and message counts
 
-Additional backend work will continue as customer order history, order details, administrator order review, and messaging are connected to the database.
-
+Additional backend work will continue as customer order history, order details, administrator order review, testing, and deployment are completed.
 
 ## Database
 
