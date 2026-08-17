@@ -132,12 +132,17 @@ CREATE TABLE cart_items (
 -- orders: a placed order belonging to a customer
 -- ----------------------------------------------------------------------------
 CREATE TABLE orders (
-    order_id     INT UNSIGNED   NOT NULL AUTO_INCREMENT,
-    user_id      INT UNSIGNED   NOT NULL,
-    status       ENUM('pending', 'paid', 'shipped', 'delivered', 'cancelled')
-                                NOT NULL DEFAULT 'pending',
-    total_amount DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
-    order_date   TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    order_id         INT UNSIGNED   NOT NULL AUTO_INCREMENT,
+    user_id          INT UNSIGNED   NOT NULL,
+    status           ENUM('pending', 'paid', 'shipped', 'delivered', 'cancelled', 'completed')
+                                    NOT NULL DEFAULT 'pending',
+    total_amount     DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+    order_date       TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    channel          VARCHAR(20)    NOT NULL DEFAULT 'delivery',
+    shipping_address TEXT           NULL,
+    tracking_number  VARCHAR(100)   NULL,
+    shipped_date     DATETIME       NULL,
+    picked_up        TINYINT(1)     NULL DEFAULT NULL,
     PRIMARY KEY (order_id),
     KEY idx_orders_user (user_id),
     CONSTRAINT fk_orders_user
