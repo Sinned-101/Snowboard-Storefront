@@ -97,26 +97,18 @@
             <a th:href="@{/admin/categories}" class="button">Manage Categories</a>
         </article>
 
-        <!-- Order summary - will be wired to real data in the orders milestone -->
+        <!-- Order management - links to the admin order management page -->
         <article class="dashboard-card">
-            <h3>Order Summary</h3>
-            <p>Order counts and status will appear here once the orders feature is built.</p>
-            <a th:href="@{/orders}" class="button">View Orders</a>
+            <h3>Order Management</h3>
+            <p>View all customer delivery orders and mark pending orders as shipped with a tracking number.</p>
+            <a th:href="@{/admin/orders}" class="button">Manage Orders</a>
         </article>
 
-        <!-- Message summary card -->
+        <!-- Message summary card - links to the admin conversations page -->
         <article class="dashboard-card">
             <h3>Message Summary</h3>
-
-            <p>
-                <strong>Total Conversations:</strong>
-                <span th:text="${conversationCount}">0</span>
-            </p>
-
-            <p>
-                <strong>Total Messages:</strong>
-                <span th:text="${messageCount}">0</span>
-            </p>
+            <p>View all customer and expert messaging threads, including which expert participated in each conversation.</p>
+            <a th:href="@{/admin/conversations}" class="button">View All Conversations</a>
         </article>
 
     </section>

@@ -195,4 +195,42 @@ public class UserDAO {
             return 0;
         }
     }
+
+    // Returns all customer accounts - used by admin when creating an order on a customer's behalf
+    public List<User> findAllCustomers() {
+
+        String sql = """
+                SELECT user_id, username, email, password_hash, role
+                FROM users
+                WHERE role = 'customer'
+                ORDER BY username
+                """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new User(
+                rs.getInt("user_id"),
+                rs.getString("username"),
+                rs.getString("email"),
+                rs.getString("password_hash"),
+                rs.getString("role")
+        ));
+    }
+
+    // Returns all expert accounts - used by admin for conversation reassignment
+    public List<User> findAllExperts() {
+
+        String sql = """
+                SELECT user_id, username, email, password_hash, role
+                FROM users
+                WHERE role = 'expert'
+                ORDER BY username
+                """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new User(
+                rs.getInt("user_id"),
+                rs.getString("username"),
+                rs.getString("email"),
+                rs.getString("password_hash"),
+                rs.getString("role")
+        ));
+    }
 }
