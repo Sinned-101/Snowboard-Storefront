@@ -103,4 +103,10 @@ public class Message {
     public void setSentAt(Timestamp sentAt) {
         this.sentAt = sentAt;
     }
+
+    // Sender username - populated via JOIN when fetching messages for display
+    private String senderUsername;
+
+    public String getSenderUsername() { return senderUsername; }
+    public void setSenderUsername(String senderUsername) { this.senderUsername = senderUsername; }
 }

@@ -81,14 +81,18 @@ public class MessageController {
         }
 
         int userId = (int) userIdObject;
+        String role = (String) session.getAttribute("role");
 
-        if (!messageDAO.userCanAccessConversation(userId, conversationId)) {
+        // Admins can view any conversation - other users can only view their own
+        boolean isAdmin = "admin".equals(role);
+        if (!isAdmin && !messageDAO.userCanAccessConversation(userId, conversationId)) {
             return "redirect:/messages";
         }
 
         model.addAttribute("messages", messageDAO.findMessagesByConversationId(conversationId));
         model.addAttribute("conversationId", conversationId);
         model.addAttribute("currentUserId", userId);
+        model.addAttribute("isAdmin", isAdmin);
 
         return "conversation-details";
     }
@@ -112,8 +116,11 @@ public class MessageController {
         }
 
         int senderId = (int) userIdObject;
+        String role = (String) session.getAttribute("role");
 
-        if (!messageDAO.userCanAccessConversation(senderId, conversationId)) {
+        // Admins can reply to any conversation
+        boolean isAdmin = "admin".equals(role);
+        if (!isAdmin && !messageDAO.userCanAccessConversation(senderId, conversationId)) {
             return "redirect:/messages";
         }
 
@@ -145,7 +152,8 @@ public class MessageController {
         }
 
         int customerId = (int) userIdObject;
-        int expertId = userDAO.findFirstExpertId();
+        // Assign to the expert with the fewest conversations for even distribution
+        int expertId = messageDAO.findExpertWithFewestConversations();
 
         if (expertId == 0 || subject.isBlank() || body.isBlank()) {
             return "redirect:/messages";

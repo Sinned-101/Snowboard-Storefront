@@ -82,21 +82,30 @@ public class MessageDAO {
      * @return list of messages in the conversation
      */
     public List<Message> findMessagesByConversationId(int conversationId) {
+
+        // JOIN with users to get the sender's username alongside each message
         String sql = """
-                SELECT message_id, conversation_id, sender_id, body, is_read, sent_at
-                FROM message
-                WHERE conversation_id = ?
-                ORDER BY sent_at
+                SELECT m.message_id, m.conversation_id, m.sender_id,
+                       m.body, m.is_read, m.sent_at,
+                       u.username AS sender_username
+                FROM message m
+                JOIN users u ON m.sender_id = u.user_id
+                WHERE m.conversation_id = ?
+                ORDER BY m.sent_at
                 """;
 
-        return jdbcTemplate.query(sql, (resultSet, rowNum) -> new Message(
-                resultSet.getInt("message_id"),
-                resultSet.getInt("conversation_id"),
-                resultSet.getInt("sender_id"),
-                resultSet.getString("body"),
-                resultSet.getBoolean("is_read"),
-                resultSet.getTimestamp("sent_at")
-        ), conversationId);
+        return jdbcTemplate.query(sql, (resultSet, rowNum) -> {
+            Message message = new Message(
+                    resultSet.getInt("message_id"),
+                    resultSet.getInt("conversation_id"),
+                    resultSet.getInt("sender_id"),
+                    resultSet.getString("body"),
+                    resultSet.getBoolean("is_read"),
+                    resultSet.getTimestamp("sent_at")
+            );
+            message.setSenderUsername(resultSet.getString("sender_username"));
+            return message;
+        }, conversationId);
     }
 
     /**
@@ -229,5 +238,72 @@ public class MessageDAO {
             """;
 
         jdbcTemplate.update(sql, conversationId);
+    }
+
+    // Returns all conversations with customer/expert usernames and message counts - for admin view
+    public List<Conversation> findAllConversationsForAdmin() {
+
+        // JOIN with users twice to get both the customer and expert username in one query
+        String sql = """
+                SELECT c.conversation_id, c.customer_id, c.expert_id,
+                       c.subject, c.created_at, c.updated_at,
+                       cu.username AS customer_username,
+                       ex.username AS expert_username,
+                       COUNT(m.message_id) AS message_count
+                FROM conversation c
+                JOIN users cu ON c.customer_id = cu.user_id
+                JOIN users ex ON c.expert_id   = ex.user_id
+                LEFT JOIN message m ON c.conversation_id = m.conversation_id
+                GROUP BY c.conversation_id, c.customer_id, c.expert_id,
+                         c.subject, c.created_at, c.updated_at,
+                         cu.username, ex.username
+                ORDER BY c.updated_at DESC
+                """;
+
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Conversation conversation = new Conversation(
+                    rs.getInt("conversation_id"),
+                    rs.getInt("customer_id"),
+                    rs.getInt("expert_id"),
+                    rs.getString("subject"),
+                    rs.getTimestamp("created_at"),
+                    rs.getTimestamp("updated_at")
+            );
+            // Populate the extra fields that only the admin query fetches
+            conversation.setCustomerUsername(rs.getString("customer_username"));
+            conversation.setExpertUsername(rs.getString("expert_username"));
+            conversation.setMessageCount(rs.getInt("message_count"));
+            return conversation;
+        });
+    }
+
+    // Finds the expert with the fewest assigned conversations for round-robin assignment
+    public int findExpertWithFewestConversations() {
+
+        // LEFT JOIN means experts with zero conversations are included in the count
+        String sql = """
+                SELECT u.user_id
+                FROM users u
+                LEFT JOIN conversation c ON u.user_id = c.expert_id
+                WHERE u.role = 'expert'
+                GROUP BY u.user_id
+                ORDER BY COUNT(c.conversation_id) ASC
+                LIMIT 1
+                """;
+
+        try {
+            Integer expertId = jdbcTemplate.queryForObject(sql, Integer.class);
+            return expertId == null ? 0 : expertId;
+        } catch (Exception exception) {
+            return 0;
+        }
+    }
+
+    // Reassigns a conversation to a different expert - used by admin
+    public void reassignConversation(int conversationId, int newExpertId) {
+
+        String sql = "UPDATE conversation SET expert_id = ? WHERE conversation_id = ?";
+
+        jdbcTemplate.update(sql, newExpertId, conversationId);
     }
 }
