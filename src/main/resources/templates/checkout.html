@@ -139,9 +139,46 @@
                 <!-- Checkout action buttons -->
                 <section class="form-actions">
 
-                    <!-- Places the customer order -->
+                    <!-- Channel selector and place order form -->
                     <form th:action="@{/checkout/place-order}" method="post">
-                        <button type="submit" class="button">Place Order</button>
+
+                        <!-- Customer selects delivery, in-store pickup, or walk-in purchase -->
+                        <p style="margin-bottom:1rem;">
+                            <strong>Order Channel:</strong>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="radio" name="channel" value="delivery" checked
+                                       onclick="document.getElementById('address-field').style.display='block'">
+                                Delivery — ship to my address on file
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="radio" name="channel" value="in_store_pickup"
+                                       onclick="document.getElementById('address-field').style.display='none'">
+                                In-Store Pickup — order now, collect at the store when ready
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="radio" name="channel" value="in_store"
+                                       onclick="document.getElementById('address-field').style.display='none'">
+                                In Store — completing purchase in person right now
+                            </label>
+                        </p>
+
+                        <!-- Delivery address field - hidden when in-store is selected -->
+                        <div id="address-field" style="margin-top:1rem;">
+                            <label for="shipping_address">Delivery Address</label>
+                            <input type="text" id="shipping_address" name="shipping_address"
+                                   th:value="${profile != null ? profile.addressLine + ', ' + profile.city + ', ' + profile.state + ' ' + profile.postalCode : ''}"
+                                   placeholder="Full shipping address">
+                        </div>
+
+                        <p style="margin-top:1.5rem;">
+                            <button type="submit" class="button">Place Order</button>
+                        </p>
                     </form>
 
                     <a th:href="@{/cart}" class="button secondary">Back to Cart</a>

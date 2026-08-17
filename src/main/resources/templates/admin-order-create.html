@@ -1,0 +1,145 @@
+<!--
+    File: admin-order-create.html
+    Description: Admin form to create an order on behalf of a customer
+    Author: Dennis Feldbruegge
+    Date Created: August 17, 2026
+    Last Updated: August 17, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Order | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <section class="site-branding">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
+            <h1 class="site-title">Black Diamond Gear</h1>
+        </section>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/admin-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Create Order for Customer</h2>
+        <p>Select a customer, choose products and quantities, then set the order channel</p>
+    </section>
+
+    <section class="admin-section">
+        <div class="admin-section-inner">
+
+            <!-- Form submits to POST /admin/orders/create -->
+            <form th:action="@{/admin/orders/create}" method="post">
+
+                <!-- Customer selection -->
+                <div class="account-form-wide" style="margin-bottom:1.5rem;">
+                    <h2>Order Details</h2>
+
+                    <p>
+                        <label for="customerId">Customer Account</label>
+                        <select id="customerId" name="customerId" required class="account-form">
+                            <option value="">-- Select a customer --</option>
+                            <!-- th:each creates one option per customer -->
+                            <option th:each="customer : ${customers}"
+                                    th:value="${customer.userId}"
+                                    th:text="${customer.username}">username</option>
+                        </select>
+                    </p>
+
+                    <!-- Channel selector - same three options as the customer checkout page -->
+                    <p><strong>Order Channel:</strong></p>
+                    <p>
+                        <label>
+                            <input type="radio" name="channel" value="delivery" checked
+                                   onclick="document.getElementById('address-field').style.display='block'">
+                            Delivery
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input type="radio" name="channel" value="in_store_pickup"
+                                   onclick="document.getElementById('address-field').style.display='none'">
+                            In-Store Pickup
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input type="radio" name="channel" value="in_store"
+                                   onclick="document.getElementById('address-field').style.display='none'">
+                            In Store (completes immediately)
+                        </label>
+                    </p>
+
+                    <!-- Delivery address - hidden when in-store channels are selected -->
+                    <div id="address-field">
+                        <label for="shipping_address">Delivery Address</label>
+                        <input type="text" id="shipping_address" name="shipping_address"
+                               placeholder="Full delivery address">
+                    </div>
+                </div>
+
+                <!-- Product selection table -->
+                <div style="margin-bottom:1.5rem;">
+                    <h2 style="color:#20e878; margin-bottom:1rem;">Select Products</h2>
+                    <p style="color:#d8d8d8; margin-bottom:1rem;">Enter a quantity of 1 or more to include a product. Leave at 0 to skip it.</p>
+
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>In Stock</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- th:each creates one row per product -->
+                            <!-- qty_{productId} naming lets the controller extract selected products -->
+                            <tr th:each="product : ${products}">
+                                <td th:text="${product.productName}">Product</td>
+                                <td th:text="${product.categoryName}">Category</td>
+                                <td th:text="${'$' + product.price}">$0.00</td>
+                                <td th:text="${product.stockQuantity}">0</td>
+                                <td>
+                                    <input type="number"
+                                           th:name="'qty_' + ${product.productId}"
+                                           value="0" min="0"
+                                           style="width:4rem; padding:0.4rem; border-radius:0.3rem; border:1px solid #999;">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="form-actions">
+                    <button type="submit" class="button">Place Order</button>
+                    <a th:href="@{/admin/orders}" class="button secondary">Cancel</a>
+                </p>
+
+            </form>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
