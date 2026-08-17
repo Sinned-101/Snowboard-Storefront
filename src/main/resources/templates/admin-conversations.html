@@ -1,0 +1,149 @@
+<!--
+    File: admin-conversations.html
+    Description: Admin view of all customer-expert conversations
+    Author: Dennis Feldbruegge
+    Date Created: August 17, 2026
+    Last Updated: August 17, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversations | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <section class="site-branding">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
+            <h1 class="site-title">Black Diamond Gear</h1>
+        </section>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/admin-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>All Conversations</h2>
+        <p>Overview of every customer and expert messaging thread</p>
+    </section>
+
+    <section class="admin-section">
+        <div class="admin-section-inner">
+
+            <!-- Message if no conversations exist yet -->
+            <p th:if="${conversations.isEmpty()}" style="color:#f4f4f4; text-align:center; margin-top:2rem;">
+                No conversations have been started yet.
+            </p>
+
+            <!-- Table listing every conversation -->
+            <table class="admin-table" th:unless="${conversations.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Subject</th>
+                        <th>Customer</th>
+                        <th>Expert</th>
+                        <th>Messages</th>
+                        <th>Started</th>
+                        <th>Last Activity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- th:each loops over the conversations list and creates one row per conversation -->
+                    <tr th:each="conversation : ${conversations}">
+                        <td th:text="${conversation.conversationId}">0</td>
+                        <td th:text="${conversation.subject}">Subject</td>
+                        <!-- customerUsername and expertUsername come from the JOIN in the admin query -->
+                        <td th:text="${conversation.customerUsername}">Customer</td>
+                        <td th:text="${conversation.expertUsername}">Expert</td>
+                        <td th:text="${conversation.messageCount}">0</td>
+                        <td th:text="${conversation.createdAt}">Date</td>
+                        <td th:text="${conversation.updatedAt}">Date</td>
+                        <td>
+                            <!-- View button links to the conversation thread -->
+                            <a th:href="@{/messages/{id}(id=${conversation.conversationId})}" class="button">View</a>
+
+                            <!-- Reassign button opens the shared modal -->
+                            <button type="button" class="button secondary"
+                                    style="margin-top:0.5rem;"
+                                    th:data-conversation-id="${conversation.conversationId}"
+                                    th:data-current-expert="${conversation.expertId}"
+                                    onclick="openReassignModal(this.dataset.conversationId, this.dataset.currentExpert)">
+                                Reassign Expert
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+<!-- Shared modal for reassigning a conversation to a different expert -->
+<div id="reassign-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+        <h3>Reassign Expert</h3>
+        <p>Select the expert to assign this conversation to.</p>
+        <form id="reassign-form" method="post">
+            <select id="reassign-expert-select" name="expertId"
+                    style="width:100%; padding:0.625rem; border:1px solid #999; border-radius:0.3rem; margin-bottom:1rem; font-family:Arial,sans-serif;">
+                <!-- th:each creates one option per expert - JavaScript will mark the correct one as selected -->
+                <option th:each="expert : ${experts}"
+                        th:value="${expert.userId}"
+                        th:text="${expert.username}">Expert</option>
+            </select>
+            <div class="form-actions">
+                <button type="submit" class="button">Save Assignment</button>
+                <button type="button" class="button secondary" onclick="closeReassignModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Opens the reassign modal and points the form at the correct conversation URL
+    function openReassignModal(conversationId, currentExpertId) {
+        document.getElementById('reassign-form').action = '/admin/conversations/' + conversationId + '/reassign';
+
+        // Pre-select the currently assigned expert in the dropdown
+        var select = document.getElementById('reassign-expert-select');
+        for (var i = 0; i < select.options.length; i++) {
+            select.options[i].selected = (select.options[i].value === currentExpertId);
+        }
+
+        document.getElementById('reassign-modal').style.display = 'flex';
+    }
+
+    // Closes the modal without submitting
+    function closeReassignModal() {
+        document.getElementById('reassign-modal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside the box
+    document.getElementById('reassign-modal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeReassignModal();
+        }
+    });
+</script>
+
+</body>
+</html>
