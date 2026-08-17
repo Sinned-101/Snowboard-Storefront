@@ -65,6 +65,13 @@
         <section class="product-grid">
             <article class="product-card" th:each="product : ${products}">
 
+                <!-- Fixed-size image container keeps all cards the same height regardless of image dimensions -->
+                <div class="product-card-image-container" th:if="${product.imageUrl != null}">
+                    <img th:src="${product.imageUrl}"
+                         th:alt="${product.productName}"
+                         class="product-card-image">
+                </div>
+
                 <!-- Shows basic product information from the database for browsing -->
                 <h3 th:text="${product.productName}">Product Name</h3>
                 <p class="product-category" th:text="${'Category: ' + product.categoryName}">Category: Category</p>

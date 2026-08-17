@@ -70,61 +70,54 @@
     </section>
 
     <!-- Conversation message area -->
-    <section class="message-section">
+    <section class="admin-section">
+        <div class="admin-section-inner">
 
-        <!-- Shows a message if the conversation has no messages -->
-        <article class="message-card" th:if="${messages.isEmpty()}">
-            <h3>No Messages</h3>
-
-            <p>
-                This conversation does not have any messages yet.
-            </p>
-        </article>
-
-        <!-- Displays messages from the selected conversation -->
-        <article class="message-card" th:each="message : ${messages}">
-            <p>
-                <strong th:text="${message.senderId == currentUserId ? 'You' : (session.role == 'customer' ? 'Gear Expert' : 'Customer')}">Sender</strong>
+            <!-- Empty state -->
+            <p th:if="${messages.isEmpty()}" style="color:#f4f4f4; text-align:center; margin-top:2rem;">
+                No messages in this conversation yet.
             </p>
 
-            <p th:text="${message.body}">
-                Message body
-            </p>
+            <!-- Messages displayed as a bordered table: Author | Message -->
+            <table class="admin-table" th:unless="${messages.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th style="width:15%;">From</th>
+                        <th>Message</th>
+                        <th style="width:18%;">Sent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- One row per message -->
+                    <tr th:each="message : ${messages}">
+                        <!-- Show "You" for the current user, otherwise the sender's username -->
+                        <td>
+                            <strong th:text="${message.senderId == currentUserId ? 'You' : message.senderUsername}">Author</strong>
+                        </td>
+                        <td th:text="${message.body}">Message content</td>
+                        <td th:text="${message.sentAt}">Date</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <p>
-                <strong>Sent:</strong>
-                <span th:text="${#dates.format(message.sentAt, 'MMM dd, yyyy h:mm a')}">Date</span>
-            </p>
-        </article>
+            <!-- Reply form -->
+            <form class="account-form-wide" th:action="@{/messages/reply}" method="post" style="margin-top:2rem;">
+                <h2>Send a Reply</h2>
+                <input type="hidden" name="conversationId" th:value="${conversationId}">
+                <p>
+                    <label for="body">Message</label>
+                    <textarea id="body" name="body" rows="5" placeholder="Type your reply here" required
+                              style="width:100%; padding:0.625rem; border:1px solid #999; border-radius:0.3rem; box-sizing:border-box; font-family:Arial,sans-serif;"></textarea>
+                </p>
+                <p class="form-actions">
+                    <button type="submit" class="button">Send Reply</button>
+                    <!-- Admins go back to the admin conversations page, other users go to their messages -->
+                    <a th:if="${isAdmin}" th:href="@{/admin/conversations}" class="button secondary">Back to All Conversations</a>
+                    <a th:unless="${isAdmin}" th:href="@{/messages}" class="button secondary">Back to Messages</a>
+                </p>
+            </form>
 
-        <!-- Form for replying to the selected conversation -->
-        <form class="message-form" th:action="@{/messages/reply}" method="post">
-            <h3>Send a Reply</h3>
-
-            <!-- Sends the selected conversation ID with the reply -->
-            <input type="hidden" name="conversationId" th:value="${conversationId}">
-
-            <!-- Reply message text area -->
-            <p>
-                <label for="body">Reply</label>
-                <textarea id="body"
-                          name="body"
-                          rows="6"
-                          placeholder="Type your reply"
-                          required></textarea>
-            </p>
-
-            <!-- Submit button -->
-            <p class="form-actions">
-                <button type="submit" class="button">Send Reply</button>
-            </p>
-        </form>
-
-        <!-- Link back to the messages page -->
-        <p class="form-actions">
-            <a th:href="@{/messages}" class="button secondary">Back to Messages</a>
-        </p>
-
+        </div>
     </section>
 
 </main>

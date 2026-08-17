@@ -103,4 +103,18 @@ public class Conversation {
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    // Extra fields populated by the admin conversation query - not in the base table
+    private String customerUsername;
+    private String expertUsername;
+    private int messageCount;
+
+    public String getCustomerUsername() { return customerUsername; }
+    public void setCustomerUsername(String customerUsername) { this.customerUsername = customerUsername; }
+
+    public String getExpertUsername() { return expertUsername; }
+    public void setExpertUsername(String expertUsername) { this.expertUsername = expertUsername; }
+
+    public int getMessageCount() { return messageCount; }
+    public void setMessageCount(int messageCount) { this.messageCount = messageCount; }
 }
