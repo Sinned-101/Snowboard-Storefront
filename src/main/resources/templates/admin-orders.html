@@ -1,0 +1,241 @@
+<!--
+    File: admin-orders.html
+    Description: Admin order management page - view all delivery orders and mark as shipped
+    Author: Dennis Feldbruegge
+    Date Created: August 16, 2026
+    Last Updated: August 16, 2026
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Orders | Black Diamond Gear</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <section class="site-branding">
+            <img th:src="@{/images/black-diamond-logo.png}" alt="Black Diamond Gear logo" class="site-logo">
+            <h1 class="site-title">Black Diamond Gear</h1>
+        </section>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/admin-dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="page-heading">
+        <h2>Manage Orders</h2>
+        <p>View all customer delivery orders. Enter a tracking number and mark pending orders as shipped.</p>
+    </section>
+
+    <section class="admin-section">
+        <div class="admin-section-inner">
+
+            <div class="form-actions" style="margin-bottom:1rem;">
+                <a th:href="@{/admin/orders/create}" class="button">Create Order for Customer</a>
+            </div>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Order #</th>
+                        <th>Customer</th>
+                        <th>Channel</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Address</th>
+                        <th>Tracking #</th>
+                        <th>Shipped Date</th>
+                        <th>Picked Up</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.orderId}">0</td>
+                        <!-- Show username with ID in parentheses for reference -->
+                        <td th:text="${order.customerUsername + ' (#' + order.userId + ')'}">Customer</td>
+                        <td th:text="${order.channel.displayName}">Channel</td>
+                        <td th:text="${order.orderDate}">Date</td>
+                        <td th:text="${'$' + order.totalAmount}">$0.00</td>
+                        <td th:text="${order.status}">status</td>
+                        <td th:text="${order.channel.channelType == 'delivery' ? order.channel.deliveryAddress : '—'}">—</td>
+                        <td th:text="${order.channel.channelType == 'delivery' and order.channel.trackingNumber != null ? order.channel.trackingNumber : '—'}">—</td>
+                        <td th:text="${order.channel.channelType == 'delivery' and order.channel.shippedDate != null ? order.channel.shippedDate : '—'}">—</td>
+                        <td th:text="${order.channel.channelType == 'in_store_pickup' ? (order.channel.pickedUp ? 'Yes' : 'No') : '—'}">—</td>
+                        <td>
+                            <!-- Pending delivery -->
+                            <table th:if="${order.channel.channelType == 'delivery' and order.status == 'pending'}" class="action-table">
+                                <tr>
+                                    <td>
+                                        <!-- data attributes carry the order ID to the JS function safely -->
+                                        <button type="button" class="button"
+                                                th:data-order-id="${order.orderId}"
+                                                onclick="openShipModal(this.dataset.orderId)">
+                                            Mark Shipped
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <form th:action="@{/admin/orders/{id}/cancel(id=${order.orderId})}" method="post">
+                                            <button type="submit" class="button secondary">Cancel Order</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Pending pickup -->
+                            <table th:if="${order.channel.channelType == 'in_store_pickup' and order.status == 'pending'}" class="action-table">
+                                <tr>
+                                    <td>
+                                        <form th:action="@{/admin/orders/{id}/pickup(id=${order.orderId})}" method="post">
+                                            <button type="submit" class="button">Mark Picked Up</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <form th:action="@{/admin/orders/{id}/cancel(id=${order.orderId})}" method="post">
+                                            <button type="submit" class="button secondary">Cancel Order</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Shipped delivery -->
+                            <table th:if="${order.channel.channelType == 'delivery' and order.status == 'shipped'}" class="action-table">
+                                <tr>
+                                    <td>
+                                        <!-- data attributes carry the order ID and current tracking number to JS -->
+                                        <button type="button" class="button"
+                                                th:data-order-id="${order.orderId}"
+                                                th:data-tracking="${order.channel.trackingNumber}"
+                                                onclick="openTrackingModal(this.dataset.orderId, this.dataset.tracking)">
+                                            Update Tracking
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <form th:action="@{/admin/orders/{id}/unship(id=${order.orderId})}" method="post">
+                                            <button type="submit" class="button secondary">Reverse Ship</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Collected pickup -->
+                            <table th:if="${order.channel.channelType == 'in_store_pickup' and order.channel.pickedUp}" class="action-table">
+                                <tr>
+                                    <td>
+                                        <form th:action="@{/admin/orders/{id}/unpickup(id=${order.orderId})}" method="post">
+                                            <button type="submit" class="button secondary">Reverse Pickup</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- No actions available -->
+                            <span th:if="${order.status == 'cancelled' or order.status == 'delivered'}"
+                                  style="color:#888; font-style:italic;">No actions available</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Black Diamond Gear. All rights reserved.</p>
+</footer>
+
+<!-- Shared modal for updating tracking number on a shipped order -->
+<div id="tracking-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+        <h3>Update Tracking Number</h3>
+        <p>Enter the new tracking number for this shipment.</p>
+        <form id="tracking-form" method="post">
+            <input type="text" id="tracking-update-input" name="trackingNumber"
+                   placeholder="e.g. 1Z999AA10123456784" required>
+            <div class="form-actions">
+                <button type="submit" class="button">Save Tracking</button>
+                <button type="button" class="button secondary" onclick="closeTrackingModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Shared modal popup for entering a tracking number before marking an order as shipped -->
+<div id="ship-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+        <h3>Enter Tracking Number</h3>
+        <p>Order will be marked as shipped once you confirm.</p>
+        <form id="ship-form" method="post">
+            <input type="text" id="tracking-input" name="trackingNumber"
+                   placeholder="e.g. 1Z999AA10123456784" required>
+            <div class="form-actions">
+                <button type="submit" class="button">Confirm Shipped</button>
+                <button type="button" class="button secondary" onclick="closeShipModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Opens the modal and points the form at the correct ship URL for this order
+    function openShipModal(orderId) {
+        document.getElementById('ship-form').action = '/admin/orders/' + orderId + '/ship';
+        document.getElementById('tracking-input').value = '';
+        document.getElementById('ship-modal').style.display = 'flex';
+    }
+
+    // Closes the modal without submitting
+    function closeShipModal() {
+        document.getElementById('ship-modal').style.display = 'none';
+    }
+
+    // Also close the modal if the user clicks the dark overlay outside the box
+    document.getElementById('ship-modal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeShipModal();
+        }
+    });
+
+    // Opens the tracking update modal and pre-fills the current tracking number
+    function openTrackingModal(orderId, currentTracking) {
+        document.getElementById('tracking-form').action = '/admin/orders/' + orderId + '/tracking';
+        // Use empty string if no tracking number exists yet
+        document.getElementById('tracking-update-input').value = currentTracking || '';
+        document.getElementById('tracking-modal').style.display = 'flex';
+    }
+
+    // Closes the tracking modal without submitting
+    function closeTrackingModal() {
+        document.getElementById('tracking-modal').style.display = 'none';
+    }
+
+    // Close tracking modal when clicking the overlay
+    document.getElementById('tracking-modal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeTrackingModal();
+        }
+    });
+</script>
+
+</body>
+</html>
