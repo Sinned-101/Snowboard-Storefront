@@ -17,28 +17,36 @@
 USE snowboard_storefront;
 
 -- ----------------------------------------------------------------------------
--- users  (1 admin, 2 experts, 3 customers)
+-- users  (1 admin, 2 experts, 6 customers)
 -- Placeholder hash represents the password noted in the comment.
 -- ----------------------------------------------------------------------------
 INSERT INTO users (user_id, username, email, password_hash, role) VALUES
     (1, 'admin',     'admin@summitgear.test',  '$2a$10$zNtfqcd7O2IFFgEm6HJcDeXsWuFP7tSRFW5DNllgdYdfU/OZRbbNW', 'admin'),    -- pw: admin123
     (2, 'expert_kai','kai@summitgear.test',    '$2a$10$f1uvU11ARFuV/gJk9otcc.1YHhre/n/U03EurCuecNnEsRdeaSnVK', 'expert'),   -- pw: expert123
     (3, 'expert_sam','sam@summitgear.test',    '$2a$10$f1uvU11ARFuV/gJk9otcc.1YHhre/n/U03EurCuecNnEsRdeaSnVK', 'expert'),   -- pw: expert123
-    (4, 'jordan',    'jordan@example.test',    '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'), -- pw: pass123
-    (5, 'mia',       'mia@example.test',       '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'), -- pw: pass123
-    (6, 'leo',       'leo@example.test',       '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'); -- pw: pass123
+    (4, 'jordan',    'jordan@example.test',    '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'), -- pw: pass123 | mixed orders
+    (5, 'mia',       'mia@example.test',       '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'), -- pw: pass123 | delivery only
+    (6, 'leo',       'leo@example.test',       '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'), -- pw: pass123 | delivery only
+    (7, 'taylor',    'taylor@example.test',    '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'), -- pw: pass123 | in-store only
+    (8, 'riley',     'riley@example.test',     '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'), -- pw: pass123 | delivery only
+    (9, 'alex',      'alex@example.test',      '$2a$10$4MGIBnQ75dqY0txZlxatfuch8YcLL9gzJPjdIlpYI24uo8cS3a/h6', 'customer'); -- pw: pass123 | mixed orders
 
 -- ----------------------------------------------------------------------------
 -- profile  (one per user)
 -- ----------------------------------------------------------------------------
 INSERT INTO profile
     (user_id, first_name, last_name, phone, address_line, city, state, postal_code, country, bio) VALUES
-    (1, 'Avery', 'Admin',       '555-0100', '1 Operations Way', 'Denver',      'CO', '80202', 'USA', 'Site administrator.'),
-    (2, 'Kai',   'Nakamura',    '555-0101', '22 Powder Ridge',  'Salt Lake City','UT','84101', 'USA', 'Backcountry rider and gear expert. 10+ years on snow.'),
-    (3, 'Sam',   'Whitfield',   '555-0102', '88 Summit Ave',    'Burlington',  'VT', '05401', 'USA', 'Park and freestyle specialist. Loves dialing in setups.'),
-    (4, 'Jordan','Reyes',       '555-0110', '14 Maple St',      'Boulder',     'CO', '80301', 'USA', NULL),
-    (5, 'Mia',   'Chen',        '555-0111', '7 Lakeview Dr',    'Portland',    'OR', '97201', 'USA', NULL),
-    (6, 'Leo',   'Petrov',      '555-0112', '301 Birch Ln',     'Seattle',     'WA', '98101', 'USA', NULL);
+    (1, 'Admin',  'Admin',       '555-0100', '1 Operations Way', 'Denver',         'CO', '80202', 'USA', 'Site administrator.'),
+    (2, 'Kai',   'Nakamura',    '555-0101', '22 Powder Ridge',  'Salt Lake City', 'UT', '84101', 'USA', 'Backcountry rider and gear expert. 10+ years on snow.'),
+    (3, 'Sam',   'Whitfield',   '555-0102', '88 Summit Ave',    'Burlington',     'VT', '05401', 'USA', 'Park and freestyle specialist. Loves dialing in setups.'),
+    (4, 'Jordan','Reyes',       '555-0110', '14 Maple St',      'Boulder',        'CO', '80301', 'USA', NULL),
+    (5, 'Mia',   'Chen',        '555-0111', '7 Lakeview Dr',    'Portland',       'OR', '97201', 'USA', NULL),
+    (6, 'Leo',   'Petrov',      '555-0112', '301 Birch Ln',     'Seattle',        'WA', '98101', 'USA', NULL),
+    -- Taylor shops in-store only - no delivery address needed
+    (7, 'Taylor','Brooks',      '555-0113', NULL,               NULL,             NULL, NULL,    'USA', NULL),
+    -- Riley and Alex both have delivery orders so addresses are required
+    (8, 'Riley', 'Torres',      '555-0114', '22 Pine Ave',      'Denver',         'CO', '80203', 'USA', NULL),
+    (9, 'Alex',  'Durant',      '555-0115', '55 Oak St',        'Breckenridge',   'CO', '80424', 'USA', NULL);
 
 -- ----------------------------------------------------------------------------
 -- category  (8 groupings)
@@ -95,20 +103,92 @@ INSERT INTO cart_items (cart_item_id, cart_id, product_id, quantity) VALUES
 
 -- ----------------------------------------------------------------------------
 -- orders + order_items
--- Mia (user 5): a delivered order. Leo (user 6): a pending order.
--- price_at_order captures the unit price at purchase time.
--- total_amount matches the sum of (quantity * price_at_order).
+-- Demonstrates all channel/status combinations across 6 customers.
+-- channel: 'delivery' or 'in_store'
+-- In-store orders complete immediately (status='completed') with no address.
+-- Delivery orders start pending and require a shipping_address.
+-- shipped orders have a tracking_number and shipped_date.
 -- ----------------------------------------------------------------------------
-INSERT INTO orders (order_id, user_id, status, total_amount, order_date) VALUES
-    (1, 5, 'delivered', 709.98, '2026-06-01 14:30:00'),   -- 449.99 (board) + 259.99 (boots) = 709.98
-    (2, 6, 'pending',   139.99, '2026-06-14 09:15:00');
+INSERT INTO orders
+    (order_id, user_id, status, total_amount, order_date,
+     channel, shipping_address, tracking_number, shipped_date, picked_up) VALUES
+
+    -- Mia (5): delivery only - one order shipped
+    (1,  5, 'shipped', 709.98, '2026-06-01 14:30:00',
+     'delivery', '7 Lakeview Dr, Portland, OR 97201', '1Z999AA10123456784', '2026-06-03 10:00:00', NULL),
+
+    -- Leo (6): delivery only - one order still pending
+    (2,  6, 'pending',   139.99, '2026-06-14 09:15:00',
+     'delivery', '301 Birch Ln, Seattle, WA 98101', NULL, NULL, NULL),
+
+    -- Jordan (4): in-store purchase - completed immediately at point of sale
+    (3,  4, 'completed',  89.99, '2026-07-02 11:00:00',
+     'in_store', NULL, NULL, NULL, NULL),
+
+    -- Jordan (4): delivery order - pending, can still be edited
+    (4,  4, 'pending',   264.98, '2026-07-15 16:45:00',
+     'delivery', '14 Maple St, Boulder, CO 80301', NULL, NULL, NULL),
+
+    -- Taylor (7): in-store only, first purchase - helmet
+    (5,  7, 'completed',  99.99, '2026-06-20 10:30:00',
+     'in_store', NULL, NULL, NULL, NULL),
+
+    -- Taylor (7): in-store only, second purchase - gloves
+    (6,  7, 'completed',  59.99, '2026-07-08 14:00:00',
+     'in_store', NULL, NULL, NULL, NULL),
+
+    -- Riley (8): delivery only - one order shipped with tracking
+    (7,  8, 'shipped',   449.99, '2026-07-05 09:00:00',
+     'delivery', '22 Pine Ave, Denver, CO 80203', '1Z999AA10123456789', '2026-07-08 08:30:00', NULL),
+
+    -- Riley (8): delivery only - second order still pending
+    (8,  8, 'pending',   409.98, '2026-07-18 13:20:00',
+     'delivery', '22 Pine Ave, Denver, CO 80203', NULL, NULL, NULL),
+
+    -- Alex (9): mixed - in-store purchase completed instantly
+    (9,  9, 'completed',  39.99, '2026-07-10 12:00:00',
+     'in_store', NULL, NULL, NULL, NULL),
+
+    -- Alex (9): mixed - delivery order shipped
+    (10, 9, 'shipped', 229.99, '2026-07-12 10:00:00',
+     'delivery', '55 Oak St, Breckenridge, CO 80424', '1Z999AA10123456790', '2026-07-14 11:00:00', NULL),
+
+    -- Jordan (4): in-store pickup - pending, not yet collected (picked_up = 0)
+    (11, 4, 'pending',   189.99, '2026-08-01 10:00:00',
+     'in_store_pickup', NULL, NULL, NULL, 0),
+
+    -- Mia (5): in-store pickup - already collected (picked_up = 1, status = completed)
+    (12, 5, 'completed',  64.99, '2026-07-28 15:30:00',
+     'in_store_pickup', NULL, NULL, NULL, 1);
 
 INSERT INTO order_items (order_item_id, order_id, product_id, quantity, price_at_order) VALUES
-    -- Order 1 (Mia): one board + one pair of boots
-    (1, 1, 1, 1, 449.99),   -- Summit All-Mountain 156
-    (2, 1, 3, 1, 259.99),   -- Glacier Boa Boots
-    -- Order 2 (Leo): one helmet
-    (3, 2, 8, 1, 139.99);   -- Guard MIPS Helmet
+    -- Order 1 (Mia, shipped delivery): board + boots
+    (1,  1, 1,  1, 449.99),   -- Summit All-Mountain 156
+    (2,  1, 3,  1, 259.99),   -- Glacier Boa Boots
+    -- Order 2 (Leo, pending delivery): helmet
+    (3,  2, 8,  1, 139.99),   -- Guard MIPS Helmet
+    -- Order 3 (Jordan, in-store): goggles
+    (4,  3, 9,  1,  89.99),   -- Vista Wide Goggles
+    -- Order 4 (Jordan, pending delivery): jacket + mittens
+    (5,  4, 11, 1, 199.99),   -- Alpine Shell Jacket
+    (6,  4, 14, 1,  64.99),   -- Summit Mittens
+    -- Order 5 (Taylor, in-store): helmet
+    (7,  5, 7,  1,  99.99),   -- Crest Snow Helmet
+    -- Order 6 (Taylor, in-store): gloves
+    (8,  6, 13, 1,  59.99),   -- Frostline Gloves
+    -- Order 7 (Riley, shipped delivery): snowboard
+    (9,  7, 1,  1, 449.99),   -- Summit All-Mountain 156
+    -- Order 8 (Riley, pending delivery): boots + bindings
+    (10, 8, 4,  1, 219.99),   -- Park Flex Boots
+    (11, 8, 5,  1, 189.99),   -- Ridge Lock Bindings
+    -- Order 9 (Alex, in-store): tuning kit
+    (12, 9, 15, 1,  39.99),   -- Edge Tuning Kit
+    -- Order 10 (Alex, shipped delivery): insulated jacket
+    (13, 10, 12, 1, 229.99),  -- Insulated Summit Jacket
+    -- Order 11 (Jordan, in-store pickup pending): bindings
+    (14, 11, 5,  1, 189.99),  -- Ridge Lock Bindings
+    -- Order 12 (Mia, in-store pickup collected): mittens
+    (15, 12, 14, 1,  64.99);  -- Summit Mittens
 
 -- ----------------------------------------------------------------------------
 -- conversation + message
