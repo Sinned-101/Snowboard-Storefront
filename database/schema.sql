@@ -194,8 +194,7 @@ CREATE TABLE conversation (
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_conversation_expert
         FOREIGN KEY (expert_id) REFERENCES users (user_id)
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT chk_conversation_distinct CHECK (customer_id <> expert_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- ----------------------------------------------------------------------------
