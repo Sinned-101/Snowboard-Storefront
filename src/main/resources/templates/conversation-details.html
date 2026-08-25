@@ -3,7 +3,7 @@
     Description: Conversation details page for viewing messages
     Author: Zach Christianson
     Date Created: August 9, 2026
-    Last Updated: August 9, 2026
+    Last Updated: August 24, 2026
 -->
 
 <!DOCTYPE html>
@@ -65,7 +65,7 @@
         <h2>Conversation Details</h2>
 
         <p>
-            View the messages for this conversation.
+            View the messages for this conversation
         </p>
     </section>
 
@@ -75,7 +75,7 @@
 
             <!-- Empty state -->
             <p th:if="${messages.isEmpty()}" style="color:#f4f4f4; text-align:center; margin-top:2rem;">
-                No messages in this conversation yet.
+                No messages in this conversation yet
             </p>
 
             <!-- Messages displayed as a bordered table: Author | Message -->
