@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 
-/**
- * Handles admin product management — listing, adding, editing, and deleting products
- */
+// Handles admin product management — listing, adding, editing, and deleting products
 @Controller
 public class AdminProductController {
 

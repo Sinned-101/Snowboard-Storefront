@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- * Handles admin user management - listing users, editing their profiles, and changing roles
- */
+// Handles admin user management - listing users, editing their profiles, and changing roles
 @Controller
 public class AdminUserController {
 

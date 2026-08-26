@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/**
- * Handles password changes for all logged-in users
- */
+// Handles password changes for all logged-in users
 @Controller
 public class PasswordController {
 

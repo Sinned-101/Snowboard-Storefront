@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- * Handles admin category management - listing, adding, editing, and deleting product categories
- */
+// Handles admin category management - listing, adding, editing, and deleting product categories
 @Controller
 public class AdminCategoryController {
 

@@ -18,9 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.snowboardstorefront.dao.MessageDAO;
 
-/**
- * Handles dashboard page requests for all three user roles
- */
+// Handles dashboard page requests for all three user roles
 @Controller
 public class DashboardController {
 
@@ -28,13 +26,7 @@ public class DashboardController {
     private final ProfileDAO profileDAO;
     private final MessageDAO messageDAO;
 
-    /**
-     * Initializes the controller with user, profile, and message database operations
-     *
-     * @param userDAO data access object for the users table
-     * @param profileDAO data access object for the profile table
-     * @param messageDAO data access object for the conversation and message tables
-     */
+    // Spring injects the UserDAO, ProfileDAO, and MessageDAO through the constructor
     public DashboardController(UserDAO userDAO, ProfileDAO profileDAO, MessageDAO messageDAO) {
         this.userDAO = userDAO;
         this.profileDAO = profileDAO;
